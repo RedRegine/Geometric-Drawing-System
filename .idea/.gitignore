@@ -1,0 +1,46 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Ignored default folder with query files
+/queries/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Build-Ordner (automatisch erzeugt)
+build/
+# Gradle-Cache und Wrapper-Dateien
+.gradle/
+.m2
+# IDE-spezifische Dateien
+.idea/
+*.iml
+*.iws
+.vscode/
+# Java-Kompilatdateien
+*.class
+bin/
+# Logdateien
+*.log
+# Temporäre Dateien
+*.tmp
+*.bak
+# Private Dokumente des Entwicklers
+/private-notes/
+# Sensible Konfigurationsdateien
+config/passwords.txt
+*.env
+# Große lokale Dateien (z. B. Bilder für Webentwicklung)
+local-assets/
+*.png
+*.jpg
+# Mac
+.DS_Store
+# Package Files
+*.jar
+*.war
+*.ear
+# One Note Notizbücher
+*.onetoc2
+*.one
