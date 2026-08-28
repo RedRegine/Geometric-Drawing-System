@@ -11,11 +11,11 @@ public class Line implements Shape {
         this.end = end;
     }
 
-    public void getStart() {
+    public Point getStart() {
         return start;
     }
 
-    public void getEnd() {
+    public Point getEnd() {
         return end;
     }
 
