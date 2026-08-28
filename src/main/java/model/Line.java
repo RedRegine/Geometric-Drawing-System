@@ -1,17 +1,14 @@
 package model;
 import api.Shape;
+import java.awt.*;
 
 public class Line implements Shape {
-    private double x1;
-    private double x2;
-    private double y1;
-    private double y2;
+    private final Point start;
+    private final Point end;
 
-    public Line(double x1, double x2, double y1, double y2) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
+    public Line(Point start, Point end) {
+        this.start = start;
+        this.end = end;
     }
 
     @Override
