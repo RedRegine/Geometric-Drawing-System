@@ -20,7 +20,7 @@ public class Line implements Shape {
     }
 
     @Override
-    public void draw() {
-        System.out.println("Drawing a Line");
+    public void draw(Graphics2D gLine) {
+        gLine.drawLine(start.x, start.y, end.x, end.y);
     }
 }
