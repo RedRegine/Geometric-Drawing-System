@@ -1,4 +1,4 @@
-package logic;
+package api;
 
 interface Shape {
     void draw();
