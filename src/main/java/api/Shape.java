@@ -1,5 +1,5 @@
 package api;
 
-interface Shape {
-    void draw();
+public interface Shape {
+    public void draw();
 }
