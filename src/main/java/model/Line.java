@@ -11,6 +11,14 @@ public class Line implements Shape {
         this.end = end;
     }
 
+    public void getStart() {
+        return start;
+    }
+
+    public void getEnd() {
+        return end;
+    }
+
     @Override
     public void draw() {
         System.out.println("Drawing a Line");
