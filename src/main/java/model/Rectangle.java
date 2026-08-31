@@ -20,6 +20,8 @@ public class Rectangle implements Shape {
 
     @Override
     public void draw(Graphics2D gRectangle) {
-        gRectangle.drawRect(start.x, start.y, end.x, end.y);
+        int width = end.x - start.x;
+        int height = end.y - start.y;
+        gRectangle.drawRect(start.x, start.y, width, height);
     }
 }
