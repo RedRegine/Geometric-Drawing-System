@@ -19,7 +19,7 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void draw() {
-        System.out.println("Drawing a Rectangle");
+    public void draw(Graphics2D gRectangle) {
+        gRectangle.drawRect(start.x, start.y, end.x, end.y);
     }
 }
