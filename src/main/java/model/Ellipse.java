@@ -19,7 +19,9 @@ public class Ellipse implements Shape {
     }
 
     @Override
-    public void draw() {
-        System.out.println("Drawing a Ellipse");
+    public void draw(Graphics2D gEllipse) {
+        int width = end.x - start.x;
+        int height = end.y - start.y;
+        gEllipse.drawOval(start.x, start.y, width, height);
     }
 }
