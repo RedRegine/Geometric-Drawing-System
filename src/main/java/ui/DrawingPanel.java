@@ -80,4 +80,32 @@ import java.util.List;
                 return null;
         }
     }
+    public void setCurrentType(ShapeType type) {
+        this.currentType = type;
+    }
+
+    @Override
+    // überschreiben der Standard-Zeichenmethode von JPanel
+    protected void paintComponent(Graphics g) {
+        // löscht den alten Inhalt, zeichnet den Hintergrund neu und verhindert Grafik-Artefakte
+        super.paintComponent(g);
+        // casten zu Graphics2D, modernere API
+        Graphics2D g2 = (Graphics2D) g;
+
+        // Durch die Liste der Formen gehen und gemeinsame Methode draw() verwenden je nach Form
+        for (Shape s : shapes) {
+            s.draw(g2);
+        }
+
+        // prüfen ob gerade gezeichnet wird
+        if (startPoint != null && currentPoint != null) {
+            // temporäres Shape erzeugen
+            Shape preview = createShape(startPoint, currentPoint);
+            if (preview != null) {
+                // dieses temporäre Shape in grau zeichnen & dieses Shape nicht speichern
+                g2.setColor(Color.GRAY);
+                preview.draw(g2);
+            }
+        }
+    }
 }
