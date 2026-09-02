@@ -67,4 +67,17 @@ import java.util.List;
             addMouseMotionListener(mouseHandler);
         }
     }
+
+    private Shape createShape(Point start, Point end) {
+        switch (currentType) {
+            case LINE:
+                return new Line(start, end);
+            case RECTANGLE:
+                return new Rectangle(start, end);
+            case ELLIPSE:
+                return new Ellipse(start, end);
+            default:
+                return null;
+        }
+    }
 }
