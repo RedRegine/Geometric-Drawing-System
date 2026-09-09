@@ -1,4 +1,4 @@
-package model; // // Modell-Paket: enthält konkrete Shape-Implementierungen
+package model; // Modell-Paket: enthält konkrete Shape-Implementierungen
 import api.Shape; // Shape-Interface für gemeinsame Zeichenfunktion
 import java.awt.*; // AWT-Klassen für Punktkoordinaten und Graphics2D
 import java.io.Serializable; // Serializable für Datei-Speicherung
