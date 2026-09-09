@@ -42,18 +42,27 @@ public class MainFrame extends JFrame {
         JMenuItem loadItem = new JMenuItem("Load");
         // Menüpunkt: Datei speichern
         JMenuItem saveItem = new JMenuItem("Save");
+        // Menüpunkt: Programm beenden
+        JMenuItem exitItem = new JMenuItem("Exit");
+
         // Aktion: Canvas löschen
         newItem.addActionListener(e -> drawingPanel.clear());
         // Aktion: Datei laden
         loadItem.addActionListener(e -> loadFile());
         // Aktion: Datei speichern
         saveItem.addActionListener(e -> saveFile());
+        // Aktion: Programm beenden
+        exitItem.addActionListener(e -> System.exit(0));
+
         // Menüpunkt hinzufügen
         fileMenu.add(newItem);
         // Menüpunkt hinzufügen
         fileMenu.add(loadItem);
         // Menüpunkt hinzufügen
         fileMenu.add(saveItem);
+        // Menüpunkt hinzufügen
+        fileMenu.add(exitItem);
+
         // Menü für Formauswahl
         JMenu shapeMenu = new JMenu("Shapes");
         // Menüpunkt: Linie
@@ -89,34 +98,26 @@ public class MainFrame extends JFrame {
 
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
-
         // Button für Linie
         JButton lineBtn = new JButton("Line");
-
         // Button für Rechteck
         JButton rectBtn = new JButton("Rect");
-
         // Button für Ellipse
         JButton ellipseBtn = new JButton("Ellipse");
 
         // Aktion: Linie setzen
         lineBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
-
         // Aktion: Rechteck setzen
         rectBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.RECTANGLE));
-
         // Aktion: Ellipse setzen
         ellipseBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.ELLIPSE));
 
         // Line Button hinzufügen
         tb.add(lineBtn);
-
         // Rectangle Button hinzufügen
         tb.add(rectBtn);
-
         // Ellipse Button hinzufügen
         tb.add(ellipseBtn);
-
         // Symbolleiste zurückgeben
         return tb;
     }
@@ -124,16 +125,12 @@ public class MainFrame extends JFrame {
 
     // Methode zum Speichern der Shapes
     private void saveFile() {
-
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
-
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-
             // Dateiobjekt holen
             File file = chooser.getSelectedFile();
-
             // Shapes speichern
             FileManager.save(file, drawingPanel.getShapes());
         }
@@ -142,16 +139,12 @@ public class MainFrame extends JFrame {
 
     // Methode zum Laden der Shapes
     private void loadFile() {
-
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
-
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-
             // Dateiobjekt holen
             File file = chooser.getSelectedFile();
-
             // Shapes laden und ins Panel setzen
             drawingPanel.setShapes(FileManager.load(file));
         }
