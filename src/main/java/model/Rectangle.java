@@ -1,4 +1,4 @@
-package model; // // Modell-Paket: enthält konkrete Shape-Implementierungen
+package model; // Modell-Paket: enthält konkrete Shape-Implementierungen
 import api.Shape; // Shape-Interface für gemeinsame Zeichenfunktion
 import java.awt.*; // AWT-Klassen für Punktkoordinaten und Graphics2D
 import java.io.Serializable; // Serializable für Datei-Speicherung
@@ -35,4 +35,25 @@ public class Rectangle implements Shape, Serializable {
         // Rechteck zeichnen
         gRectangle.drawRect(start.x, start.y, width, height);
     }
+
+    @Override
+    public boolean containsPoint(int x, int y) {
+        // Bestimme die kleinste und größte X-Koordinate des Rechtecks.
+        // Da Start- und Endpunkt beliebig gesetzt sein können (z. B. von rechts nach links),
+        // müssen die Werte normalisiert werden.
+        int minX = Math.min(start.x, end.x);
+        int maxX = Math.max(start.x, end.x);
+
+        // Bestimme die kleinste und größte Y-Koordinate des Rechtecks.
+        int minY = Math.min(start.y, end.y);
+        int maxY = Math.max(start.y, end.y);
+
+        // Prüft, ob der angeklickte Punkt (x, y) innerhalb des Rechtecks liegt.
+        // Ein Punkt liegt im Rechteck, wenn:
+        // - seine X-Koordinate zwischen minX und maxX liegt
+        // - seine Y-Koordinate zwischen minY und maxY liegt
+        return x >= minX && x <= maxX && y >= minY && y <= maxY;
+    }
 }
+
+
