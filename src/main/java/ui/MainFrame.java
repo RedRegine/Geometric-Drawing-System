@@ -1,10 +1,9 @@
-package ui; // Paket für alle UI-bezogenen Klassen
-
+MainFrame.java
+        package ui; // Paket für alle UI-bezogenen Klassen
 import logic.ShapeType; // Import des Enums für die Formtypen
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
 import java.awt.*; // AWT für Layouts (BorderLayout)
 import java.io.File; // File-Klasse für Laden/Speichern
-
 // MainFrame ist das Hauptfenster der Anwendung
 public class MainFrame extends JFrame {
     // Referenz auf das Zeichenpanel (zentraler Zeichenbereich)
@@ -13,7 +12,6 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         // Titel des Fensters setzen
         super("Geometric Drawing System");
-
         // Zeichenpanel erzeugen
         drawingPanel = new DrawingPanel();
         // Zeichenpanel in die Mitte des Fensters einfügen
@@ -42,8 +40,6 @@ public class MainFrame extends JFrame {
         JMenuItem loadItem = new JMenuItem("Load");
         // Menüpunkt: Datei speichern
         JMenuItem saveItem = new JMenuItem("Save");
-        // Menüpunkt: Programm beenden
-        JMenuItem exitItem = new JMenuItem("Exit");
 
         // Aktion: Canvas löschen
         newItem.addActionListener(e -> drawingPanel.clear());
@@ -51,8 +47,6 @@ public class MainFrame extends JFrame {
         loadItem.addActionListener(e -> loadFile());
         // Aktion: Datei speichern
         saveItem.addActionListener(e -> saveFile());
-        // Aktion: Programm beenden
-        exitItem.addActionListener(e -> System.exit(0));
 
         // Menüpunkt hinzufügen
         fileMenu.add(newItem);
@@ -60,8 +54,6 @@ public class MainFrame extends JFrame {
         fileMenu.add(loadItem);
         // Menüpunkt hinzufügen
         fileMenu.add(saveItem);
-        // Menüpunkt hinzufügen
-        fileMenu.add(exitItem);
 
         // Menü für Formauswahl
         JMenu shapeMenu = new JMenu("Shapes");
@@ -71,6 +63,7 @@ public class MainFrame extends JFrame {
         JMenuItem rectItem = new JMenuItem("Rectangle");
         // Menüpunkt: Ellipse
         JMenuItem ellipseItem = new JMenuItem("Ellipse");
+
         // Aktion: Formtyp Linie setzen
         lineItem.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
         // Aktion: Formtyp Rechteck setzen
@@ -84,7 +77,27 @@ public class MainFrame extends JFrame {
         shapeMenu.add(rectItem);
         // Menüpunkt Ellipse hinzufügen
         shapeMenu.add(ellipseItem);
+        // Extra Funktionen Menü
+        JMenu extraMenu = new JMenu("Extras");
+        // Farbauswahl für die Formen (Color Picker)
+        JMenuItem colorItem = new JMenuItem("Choose Color");
+        colorItem.addActionListener(e -> {
+            Color c = JColorChooser.showDialog(this, "Choose Shape Color", drawingPanel.getCurrentColor());
+            if (c != null) drawingPanel.setCurrentColor(c);
+        });
+        // Undo-Funktion: letzte Form löschen
+        JMenuItem undoItem = new JMenuItem("Undo Last Shape");
+        undoItem.addActionListener(e -> drawingPanel.undoLastShape());
 
+        // Radiergummi: Durch Anklicken Formen löschen
+        JMenuItem eraserItem = new JMenuItem("Eraser Mode");
+        eraserItem.addActionListener(e -> drawingPanel.enableEraserMode());
+        // Extra-Menüpunkt Farbauswahl hinzufügen
+        extraMenu.add(colorItem);
+        // Extra-Menüpunkt Undo hinzufügen
+        extraMenu.add(undoItem);
+        // Extra-Menüpunkt Radiergummi hinzufügen
+        extraMenu.add(eraserItem);
         // Datei-Menü zur Menüleiste hinzufügen
         bar.add(fileMenu);
         // Shapes-Menü zur Menüleiste hinzufügen
@@ -92,10 +105,8 @@ public class MainFrame extends JFrame {
         // Menüleiste zurückgeben
         return bar;
     }
-
     // Methode erzeugt die Symbolleiste
     private JToolBar createToolBar() {
-
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
         // Button für Linie
@@ -104,14 +115,12 @@ public class MainFrame extends JFrame {
         JButton rectBtn = new JButton("Rect");
         // Button für Ellipse
         JButton ellipseBtn = new JButton("Ellipse");
-
         // Aktion: Linie setzen
         lineBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
         // Aktion: Rechteck setzen
         rectBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.RECTANGLE));
         // Aktion: Ellipse setzen
         ellipseBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.ELLIPSE));
-
         // Line Button hinzufügen
         tb.add(lineBtn);
         // Rectangle Button hinzufügen
@@ -121,8 +130,6 @@ public class MainFrame extends JFrame {
         // Symbolleiste zurückgeben
         return tb;
     }
-
-
     // Methode zum Speichern der Shapes
     private void saveFile() {
         // Datei-Dialog erzeugen
@@ -135,8 +142,6 @@ public class MainFrame extends JFrame {
             FileManager.save(file, drawingPanel.getShapes());
         }
     }
-
-
     // Methode zum Laden der Shapes
     private void loadFile() {
         // Datei-Dialog erzeugen
