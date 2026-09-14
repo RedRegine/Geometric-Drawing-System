@@ -65,8 +65,8 @@ public class DrawingPanel extends JPanel {
                     } else {
                         // Nachrichtenbox anzeigen
                         JOptionPane.showMessageDialog(
-                                // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
-                                this,
+                                // DrawingPanel.this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
+                                DrawingPanel.this,
                                 "No shape was erased.",
                                 "Eraser",
                                 JOptionPane.INFORMATION_MESSAGE
@@ -184,8 +184,8 @@ public class DrawingPanel extends JPanel {
         } else {
             // Nachrichtenbox anzeigen
             JOptionPane.showMessageDialog(
-                    // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
-                    this,
+                    // DrawingPanel.this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
+                    DrawingPanel.this,
                     "There is no shape in your painting.",
                     "Undo not possible",
                     JOptionPane.INFORMATION_MESSAGE
