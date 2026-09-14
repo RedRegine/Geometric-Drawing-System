@@ -1,6 +1,6 @@
 package model; // Modell-Paket: enthält konkrete Shape-Implementierungen
 import api.Shape; // Shape-Interface für gemeinsame Zeichenfunktion
-import java.awt.*; // AWT-Klassen für Punktkoordinaten und Graphics2D
+import java.awt.*; // AWT für Layouts (BorderLayout)
 import java.io.Serializable; // Serializable für Datei-Speicherung
 
 // Klasse für Ellipsenobjekte, implementiert Shape und Serializable
@@ -34,5 +34,26 @@ public class Ellipse implements Shape, Serializable {
         int height = end.y - start.y;
         // Ellipse zeichnen
         gEllipse.drawOval(start.x, start.y, width, height);
+    }
+
+    @Override
+    public boolean containsPoint(int x, int y) {
+        // Breite und Höhe der Ellipse
+        int width = Math.abs(end.x - start.x);
+        int height = Math.abs(end.y - start.y);
+
+        // Mittelpunkt der Ellipse
+        int cx = Math.min(start.x, end.x) + width / 2;
+        int cy = Math.min(start.y, end.y) + height / 2;
+
+        // Radien
+        double rx = width / 2.0;
+        double ry = height / 2.0;
+
+        // Ellipsen-Gleichung prüfen
+        double dx = (x - cx) / rx;
+        double dy = (y - cy) / ry;
+
+        return dx * dx + dy * dy <= 1.0;
     }
 }
