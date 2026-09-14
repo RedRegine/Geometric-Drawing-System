@@ -1,9 +1,9 @@
-MainFrame.java
-        package ui; // Paket für alle UI-bezogenen Klassen
+package ui; // Paket für alle UI-bezogenen Klassen
 import logic.ShapeType; // Import des Enums für die Formtypen
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
 import java.awt.*; // AWT für Layouts (BorderLayout)
 import java.io.File; // File-Klasse für Laden/Speichern
+
 // MainFrame ist das Hauptfenster der Anwendung
 public class MainFrame extends JFrame {
     // Referenz auf das Zeichenpanel (zentraler Zeichenbereich)
@@ -105,31 +105,62 @@ public class MainFrame extends JFrame {
         // Menüleiste zurückgeben
         return bar;
     }
+
     // Methode erzeugt die Symbolleiste
     private JToolBar createToolBar() {
+
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
+
         // Button für Linie
         JButton lineBtn = new JButton("Line");
         // Button für Rechteck
         JButton rectBtn = new JButton("Rect");
         // Button für Ellipse
         JButton ellipseBtn = new JButton("Ellipse");
+
         // Aktion: Linie setzen
         lineBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
         // Aktion: Rechteck setzen
         rectBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.RECTANGLE));
         // Aktion: Ellipse setzen
         ellipseBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.ELLIPSE));
+
         // Line Button hinzufügen
         tb.add(lineBtn);
         // Rectangle Button hinzufügen
         tb.add(rectBtn);
         // Ellipse Button hinzufügen
         tb.add(ellipseBtn);
+
+        // Aktion: Farbe für die Formen setzen
+        JButton colorBtn = new JButton("Color");
+        // Farbe setzen
+        colorBtn.addActionListener(e -> {
+            // Dialog anzeigen und User Farbe bestimmen lassen
+            Color c = JColorChooser.showDialog(this, "Choose Shape Color", drawingPanel.getCurrentColor());
+            // Hat der User ausgewählt, dann setzen
+            if (c != null) drawingPanel.setCurrentColor(c);
+        });
+        // Aktion: Undo setzen
+        JButton undoBtn = new JButton("Undo");
+        // Letzte Form zurücknehmen
+        undoBtn.addActionListener(e -> drawingPanel.undoLastShape());
+        // Aktion: Radiergummi setzen
+        JButton eraserBtn = new JButton("Eraser");
+        eraserBtn.addActionListener(e -> drawingPanel.enableEraserMode());
+
+        // Farb Button hinzufügen
+        tb.add(colorBtn);
+        // Undo Button hinzufügen
+        tb.add(undoBtn);
+        // Radiergummi Button hinzufügen
+        tb.add(eraserBtn);
+
         // Symbolleiste zurückgeben
         return tb;
     }
+
     // Methode zum Speichern der Shapes
     private void saveFile() {
         // Datei-Dialog erzeugen
@@ -142,6 +173,7 @@ public class MainFrame extends JFrame {
             FileManager.save(file, drawingPanel.getShapes());
         }
     }
+
     // Methode zum Laden der Shapes
     private void loadFile() {
         // Datei-Dialog erzeugen
@@ -155,3 +187,4 @@ public class MainFrame extends JFrame {
         }
     }
 }
+
