@@ -157,4 +157,27 @@ public class DrawingPanel extends JPanel {
             );
         }
     }
+
+    // Extra Radiergummi: Form anklicken und entfernen
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (eraserMode) {
+            // Nachverfolgung  ob wirklich Formen entfernt werden sollen
+            boolean removed = shapes.removeIf(s -> s.containsPoint(e.getX(), e.getY()));
+            if (removed) {
+                // Repaint nur verwenden, wenn etwas wirklich enfernt werden soll
+                repaint();
+                // Keine Form gefunden / getroffen
+            } else {
+                // Nachrichtenbox anzeigen
+                JOptionPane.showMessageDialog(
+                        // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
+                        this,
+                        "No shape was erased.",
+                        "Eraser",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        }
+    }
 }
