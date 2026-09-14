@@ -40,6 +40,8 @@ public class MainFrame extends JFrame {
         JMenuItem loadItem = new JMenuItem("Load");
         // Menüpunkt: Datei speichern
         JMenuItem saveItem = new JMenuItem("Save");
+        // Menüpunkt: Programm beenden
+        JMenuItem exitItem = new JMenuItem("Exit");
 
         // Aktion: Canvas löschen
         newItem.addActionListener(e -> drawingPanel.clear());
@@ -47,13 +49,17 @@ public class MainFrame extends JFrame {
         loadItem.addActionListener(e -> loadFile());
         // Aktion: Datei speichern
         saveItem.addActionListener(e -> saveFile());
+        // Aktion: Programm beenden
+        exitItem.addActionListener(e -> System.exit(0));
 
-        // Menüpunkt hinzufügen
+        // Menüpunkt hinzufügen neue Datei
         fileMenu.add(newItem);
-        // Menüpunkt hinzufügen
+        // Menüpunkt hinzufügen laden
         fileMenu.add(loadItem);
-        // Menüpunkt hinzufügen
+        // Menüpunkt hinzufügen sichern
         fileMenu.add(saveItem);
+        // Menüpunkt hinzufügen beenden
+        fileMenu.add(exitItem);
 
         // Menü für Formauswahl
         JMenu shapeMenu = new JMenu("Shapes");
@@ -77,6 +83,7 @@ public class MainFrame extends JFrame {
         shapeMenu.add(rectItem);
         // Menüpunkt Ellipse hinzufügen
         shapeMenu.add(ellipseItem);
+
         // Extra Funktionen Menü
         JMenu extraMenu = new JMenu("Extras");
         // Farbauswahl für die Formen (Color Picker)
@@ -88,16 +95,17 @@ public class MainFrame extends JFrame {
         // Undo-Funktion: letzte Form löschen
         JMenuItem undoItem = new JMenuItem("Undo Last Shape");
         undoItem.addActionListener(e -> drawingPanel.undoLastShape());
-
         // Radiergummi: Durch Anklicken Formen löschen
         JMenuItem eraserItem = new JMenuItem("Eraser Mode");
         eraserItem.addActionListener(e -> drawingPanel.enableEraserMode());
+
         // Extra-Menüpunkt Farbauswahl hinzufügen
         extraMenu.add(colorItem);
         // Extra-Menüpunkt Undo hinzufügen
         extraMenu.add(undoItem);
         // Extra-Menüpunkt Radiergummi hinzufügen
         extraMenu.add(eraserItem);
+
         // Datei-Menü zur Menüleiste hinzufügen
         bar.add(fileMenu);
         // Shapes-Menü zur Menüleiste hinzufügen
