@@ -1,9 +1,10 @@
-package api; // API-Paket: enthält gemeinsame Schnittstellen für alle Zeichenobjekte
-import java.awt.*; // AWT-Grafikklassen, insbesondere Graphics2D für das Zeichnen
+package api; // Shape-Interface für alle Zeichenobjekte
+import java.awt.*; // AWT für Layouts (BorderLayout)
 
-// Shape definiert die gemeinsame Zeichenfunktion für alle Formen
+// Gemeinsame Schnittstelle für alle Zeichenobjekte
 public interface Shape {
-    // Jede konkrete Form muss eine draw-Methode implementieren,
-    // die sich selbst mit Graphics2D zeichnet
-    public void draw(Graphics2D g);
+    // Zeichnet die Form
+    void draw(Graphics2D g);
+    // Prüft, ob ein Punkt innerhalb der Form liegt (für Radiergummi)
+    boolean containsPoint(int x, int y);
 }
