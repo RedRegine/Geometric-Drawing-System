@@ -127,7 +127,7 @@ public class DrawingPanel extends JPanel {
     }
 
     /* Extra-Menü Farbe setzen
-    aktuelle Farbe bestimmen */
+    Extra Funktion: aktuelle Farbe bestimmen */
     private Color currentColor = Color.BLACK;
     // Getter für aktuelle Farbe
     public Color getCurrentColor() {
@@ -136,5 +136,25 @@ public class DrawingPanel extends JPanel {
     // Setter für das Setzen der Farbe
     public void setCurrentColor(Color c) {
         this.currentColor = c;
+    }
+
+    // Extra Funktion: Die letzte gezeichnete Form rückgängig machen
+    // Extra Undo: Entfernt die letzte Form
+    public void undoLastShape() {
+        // Prüfen ob etwas gezeichnet wurde
+        if(!shape.isEmpty()) {
+            shapes.remove(shapes.size() - 1);
+            repaint();
+            // Keine Zeichnung gefunden
+        } else {
+            // Nachrichtenbox anzeigen
+            JOptionPane.showMessageDialog(
+                    // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
+                    this,
+                    "There is no shape in your painting.",
+                    "Undo not possible",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
 }
