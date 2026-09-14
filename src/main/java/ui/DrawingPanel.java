@@ -49,11 +49,34 @@ public class DrawingPanel extends JPanel {
         MouseAdapter mouseHandler = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                // Startpunkt setzen, wenn Maus gedrückt wird
+                // Startpunkt setzen, wenn Maus gedrückt wird beim zeichnen
                 startPoint = e.getPoint();
-                // Vorschau beginnt am Startpunkt
+                // Vorschau beginnt am Startpunkt beim zeichnen
                 currentPoint = startPoint;
+
+                // Extra-Funktion Radiergummi: Form anklicken und entfernen
+                if (eraserMode) {
+                    // Nachverfolgung  ob wirklich Formen entfernt werden sollen
+                    boolean removed = shapes.removeIf(s -> s.containsPoint(e.getX(), e.getY()));
+                    if (removed) {
+                        // Repaint nur verwenden, wenn etwas wirklich enfernt werden soll
+                        repaint();
+                        // Keine Form gefunden / getroffen
+                    } else {
+                        // Nachrichtenbox anzeigen
+                        JOptionPane.showMessageDialog(
+                                // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
+                                this,
+                                "No shape was erased.",
+                                "Eraser",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    }
+                    // Solange Radiergummi-Modus aktiv ist kein Zeichnen starten
+                    return;
+                }
             }
+
             @Override
             public void mouseDragged(MouseEvent e) {
                 // Aktuellen Punkt während des Ziehens aktualisieren
@@ -61,6 +84,7 @@ public class DrawingPanel extends JPanel {
                 // Panel neu zeichnen, um Vorschau zu aktualisieren
                 repaint();
             }
+
             @Override
             public void mouseReleased(MouseEvent e) {
                 // Beim Loslassen: Endpunkt vorhanden?
@@ -127,7 +151,7 @@ public class DrawingPanel extends JPanel {
     }
 
     /* Extra-Menü Farbe setzen
-    Extra Funktion: aktuelle Farbe bestimmen */
+    Extra aktuelle Farbe bestimmen */
     private Color currentColor = Color.BLACK;
     // Getter für aktuelle Farbe
     public Color getCurrentColor() {
@@ -138,11 +162,22 @@ public class DrawingPanel extends JPanel {
         this.currentColor = c;
     }
 
-    // Extra Funktion: Die letzte gezeichnete Form rückgängig machen
+    /* Extra Radiergummi: Form anklicken und entfernen
+    Flag, ob der Radiergummi-Modus aktiv ist */
+    private boolean eraserMode = false;
+    // Aktiviert den Radiergummi-Modus
+    public void enableEraserMode() {
+        eraserMode = true;
+    }
+    // Deaktiviert den Radiergummi-Modus (optional, z. B. beim Wechsel des Zeichentyps)
+    public void disableEraserMode() {
+        eraserMode = false;
+    }
+
     // Extra Undo: Entfernt die letzte Form
     public void undoLastShape() {
         // Prüfen ob etwas gezeichnet wurde
-        if(!shape.isEmpty()) {
+        if(!shapes.isEmpty()) {
             shapes.remove(shapes.size() - 1);
             repaint();
             // Keine Zeichnung gefunden
@@ -155,29 +190,6 @@ public class DrawingPanel extends JPanel {
                     "Undo not possible",
                     JOptionPane.INFORMATION_MESSAGE
             );
-        }
-    }
-
-    // Extra Radiergummi: Form anklicken und entfernen
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if (eraserMode) {
-            // Nachverfolgung  ob wirklich Formen entfernt werden sollen
-            boolean removed = shapes.removeIf(s -> s.containsPoint(e.getX(), e.getY()));
-            if (removed) {
-                // Repaint nur verwenden, wenn etwas wirklich enfernt werden soll
-                repaint();
-                // Keine Form gefunden / getroffen
-            } else {
-                // Nachrichtenbox anzeigen
-                JOptionPane.showMessageDialog(
-                        // this verwenden, weil DrawingPanel ein JPanel ist (Swing‑Komponenten = Eltern)
-                        this,
-                        "No shape was erased.",
-                        "Eraser",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-            }
         }
     }
 }
