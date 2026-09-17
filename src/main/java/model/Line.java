@@ -14,7 +14,7 @@ public class Line implements Shape, Serializable {
     // Strichstärke der Linie
     private final float strokeWidth;
 
-    // alte Konstruktor: setzt Start- und Endpunkt
+    // alter Konstruktor: setzt Start- und Endpunkt
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;

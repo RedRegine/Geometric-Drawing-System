@@ -9,11 +9,24 @@ public class Rectangle implements Shape, Serializable {
     private final Point start;
     // Endpunkt (rechte untere Ecke)
     private final Point end;
+    // Farbe des Rechtecks
+    private final Color color;
+    // Strichstärke der Linien des Rechtecks
+    private final float strokeWidth;
 
-    // Konstruktor: setzt Start- und Endpunkt
+
+    // alter Konstruktor: setzt Start- und Endpunkt
     public Rectangle(Point start, Point end) {
         this.start = start;
         this.end = end;
+    }
+
+    // neuer Konstruktor: Start- und Endpunkt, Strichfarbe und Strichstärke
+    public Rectangle(Point start, Point end, Color color, float strokeWidth) {
+        this.start = start;
+        this.end = end;
+        this.color = color;
+        this.strokeWidth = strokeWidth;
     }
 
     // Getter für Startpunkt
@@ -28,12 +41,24 @@ public class Rectangle implements Shape, Serializable {
     @Override
     // Zeichnet das Rechteck basierend auf Start- und Endpunkt
     public void draw(Graphics2D gRectangle) {
+        // Aktuelle Einstellungen sichern
+        Color oldColor = gRectangle.getColor();
+        Stroke oldStroke = gRectangle.getStroke();
+
+        // Farbe und Strichstärke setzen
+        gRectangle.setColor(color);
+        gRectangle.setStroke(new BasicStroke(strokeWidth));
+
         // Breite berechnet aus Differenz der x-Koordinaten
         int width = end.x - start.x;
         // Höhe berechnet aus Differenz der y-Koordinaten
         int height = end.y - start.y;
         // Rechteck zeichnen
         gRectangle.drawRect(start.x, start.y, width, height);
+
+        // Einstellungen wiederherstellen
+        gRectangle.setColor(oldColor);
+        gRectangle.setStroke(oldStroke);
     }
 
     @Override
