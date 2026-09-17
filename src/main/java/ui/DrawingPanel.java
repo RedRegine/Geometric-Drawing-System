@@ -125,6 +125,8 @@ public class DrawingPanel extends JPanel {
     // Setzt den aktuellen Zeichentyp (über Menü oder Toolbar)
     public void setCurrentType(ShapeType type) {
         this.currentType = type;
+        // Radiergummi Modus wieder schließen
+        disableEraserMode();
     }
 
     @Override
