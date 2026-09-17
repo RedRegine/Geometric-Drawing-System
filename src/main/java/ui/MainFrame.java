@@ -3,6 +3,7 @@ import logic.ShapeType; // Import des Enums für die Formtypen
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
 import java.awt.*; // AWT für Layouts (BorderLayout)
 import java.io.File; // File-Klasse für Laden/Speichern
+import javax.swing.filechooser.FileNameExtensionFilter; // nur Dateien vom Typ JPG anzeigen
 
 // MainFrame ist das Hauptfenster der Anwendung
 public class MainFrame extends JFrame {
@@ -173,11 +174,22 @@ public class MainFrame extends JFrame {
     private void saveFile() {
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
+
+        // Nur JPG-Dateien anzeigen
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG-Dateien (*.jpg)", "jpg", "jpeg");
+        // Filter für .jpg setzen
+        chooser.setFileFilter(filter);
+
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            // Dateiobjekt holen
             File file = chooser.getSelectedFile();
-            // Shapes speichern
+
+            // Falls der Benutzer keine Endung angegeben hat, .jpg ergänzen
+            if (!file.getName().toLowerCase().endsWith(".jpg")
+                    && !file.getName().toLowerCase().endsWith(".jpeg")) {
+                file = new File(file.getAbsolutePath() + ".jpg");
+            }
+
             FileManager.save(file, drawingPanel.getShapes());
         }
     }
@@ -186,6 +198,12 @@ public class MainFrame extends JFrame {
     private void loadFile() {
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
+
+        // Nur JPG-Dateien anzeigen
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG-Dateien (*.jpg)", "jpg", "jpeg");
+        // Filter für .jpg setzen
+        chooser.setFileFilter(filter);
+
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             // Dateiobjekt holen
