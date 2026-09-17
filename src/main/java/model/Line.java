@@ -36,6 +36,16 @@ public class Line implements Shape, Serializable {
     public Point getEnd() {
         return end;
     }
+    // Getter für die Formfarbe
+    @Override
+    public Color getColor() {
+        return color;
+    }
+    // Getter für die Strichstärke
+    @Override
+    public float getStrokeWidth() {
+        return strokeWidth;
+    }
 
     @Override
     // Zeichnet die Linie mit Graphics2D

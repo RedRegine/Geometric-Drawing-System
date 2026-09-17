@@ -37,6 +37,16 @@ public class Rectangle implements Shape, Serializable {
     public Point getEnd() {
         return end;
     }
+    // Getter für die Formfarbe
+    @Override
+    public Color getColor() {
+        return color;
+    }
+    // Getter für die Strichstärke
+    @Override
+    public float getStrokeWidth() {
+        return strokeWidth;
+    }
 
     @Override
     // Zeichnet das Rechteck basierend auf Start- und Endpunkt
