@@ -111,37 +111,59 @@ public class MainFrame extends JFrame {
         bar.add(fileMenu);
         // Shapes-Menü zur Menüleiste hinzufügen
         bar.add(shapeMenu);
+        // Extra-Menü zur Menüleiste hinzufügen
+        bar.add(extraMenu);
         // Menüleiste zurückgeben
         return bar;
     }
 
     // Methode erzeugt die Symbolleiste
     private JToolBar createToolBar() {
-
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
 
-        // Button für Linie
+        // Datei
+        // Button erzeugen: Neu, Laden, Speichern und Beenden
+        JButton newBtn = new JButton("New");
+        JButton loadBtn = new JButton("Load");
+        JButton saveBtn = new JButton("Save");
+        JButton exitBtn = new JButton("Exit");
+
+        // Aktionen ausführen (Klick = Trigger) : Neu, Laden, Speichern und Beenden
+        newBtn.addActionListener(e -> drawingPanel.clear());
+        loadBtn.addActionListener(e -> loadFile());
+        saveBtn.addActionListener(e -> saveFile());
+        exitBtn.addActionListener(e -> System.exit(0));
+
+        // Btn (Button) hinzufügen: Neu, Laden, Speichern und Beenden
+        tb.add(newBtn);
+        tb.add(loadBtn);
+        tb.add(saveBtn);
+        tb.add(exitBtn);
+
+        // Trennlinie zwischen den Kategorien
+        tb.addSeparator();
+
+        // Formen
+        // Button erzeugen: Linie, Rechteck, Ellipse
         JButton lineBtn = new JButton("Line");
-        // Button für Rechteck
-        JButton rectBtn = new JButton("Rect");
-        // Button für Ellipse
+        JButton rectBtn = new JButton("Rectangle");
         JButton ellipseBtn = new JButton("Ellipse");
 
-        // Aktion: Linie setzen
+        // Aktionen ausführen (Klick = Trigger) : Linie, Rechteck oder Ellipse setzen
         lineBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
-        // Aktion: Rechteck setzen
         rectBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.RECTANGLE));
-        // Aktion: Ellipse setzen
         ellipseBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.ELLIPSE));
 
-        // Line Button hinzufügen
+        // Btn (Button) hinzufügen: Linie, Rechteck, Ellipse
         tb.add(lineBtn);
-        // Rectangle Button hinzufügen
         tb.add(rectBtn);
-        // Ellipse Button hinzufügen
         tb.add(ellipseBtn);
 
+        // Trennlinie zwischen den Formen und Extras
+        tb.addSeparator();
+
+        // EXTRAS
         // Aktion: Farbe für die Formen setzen
         JButton colorBtn = new JButton("Color");
         // Farbe setzen
@@ -151,19 +173,19 @@ public class MainFrame extends JFrame {
             // Hat der User ausgewählt, dann setzen
             if (c != null) drawingPanel.setCurrentColor(c);
         });
+
         // Aktion: Undo setzen
         JButton undoBtn = new JButton("Undo");
         // Letzte Form zurücknehmen
         undoBtn.addActionListener(e -> drawingPanel.undoLastShape());
+
         // Aktion: Radiergummi setzen
         JButton eraserBtn = new JButton("Eraser");
         eraserBtn.addActionListener(e -> drawingPanel.enableEraserMode());
 
-        // Farb Button hinzufügen
+        // Btn (Button) hinzufügen: Farbauswahl, Rückkängig und Radiergummi
         tb.add(colorBtn);
-        // Undo Button hinzufügen
         tb.add(undoBtn);
-        // Radiergummi Button hinzufügen
         tb.add(eraserBtn);
 
         // Symbolleiste zurückgeben
