@@ -1,14 +1,24 @@
 package ui; // Paket für alle UI-bezogenen Klassen
+
 import logic.ShapeType; // Import des Enums für die Formtypen
+
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
-import java.awt.*; // AWT für Layouts (BorderLayout)
-import java.io.File; // File-Klasse für Laden/Speichern
 import javax.swing.filechooser.FileNameExtensionFilter; // nur Dateien vom Typ JPG anzeigen
+import javax.imageio.ImageIO; // zum Laden und Speichern von Bildern
+
+import java.awt.*; // AWT für Layouts (BorderLayout)
+import java.awt.event.KeyEvent; // für Tastaturkürzel
+import java.awt.event.InputEvent; // für Tastaturkürzel mit STRG
+import java.awt.image.BufferedImage; // Bild, das geladen und gespeichert wird
+import java.io.File; // File-Klasse für Laden/Speichern
+import java.io.IOException; // für mögliche Fehler beim Laden und Speichern
 
 // MainFrame ist das Hauptfenster der Anwendung
 public class MainFrame extends JFrame {
+
     // Referenz auf das Zeichenpanel (zentraler Zeichenbereich)
     private final DrawingPanel drawingPanel;
+
     // Konstruktor: baut das komplette Fenster
     public MainFrame() {
         // Titel des Fensters setzen
@@ -31,19 +41,45 @@ public class MainFrame extends JFrame {
 
     // Methode erzeugt die komplette Menüleiste
     private JMenuBar createMenuBar() {
+
         // Menüleiste erzeugen
         JMenuBar bar = new JMenuBar();
         // Datei-Menü (New, Load, Save)
         JMenu fileMenu = new JMenu("File");
+        // Menü kann über die Tastatur mit ALT + F geöffnet werden
+        fileMenu.setMnemonic(KeyEvent.VK_F);
         // Menüpunkt: neue Datei (Canvas leeren)
         JMenuItem newItem = new JMenuItem("New");
+        // Tastaturkürzel für "New"
+        newItem.setAccelerator(
+                KeyStroke.getKeyStroke(
+                        KeyEvent.VK_N,
+                        InputEvent.CTRL_DOWN_MASK
+                )
+        );
+
         // Menüpunkt: Datei laden
         JMenuItem loadItem = new JMenuItem("Load");
+        // Tastaturkürzel für "Load"
+        loadItem.setAccelerator(
+                KeyStroke.getKeyStroke(
+                        KeyEvent.VK_O,
+                        InputEvent.CTRL_DOWN_MASK
+                )
+        );
+
         // Menüpunkt: Datei speichern
         JMenuItem saveItem = new JMenuItem("Save");
+        // Tastaturkürzel für "Save"
+        saveItem.setAccelerator(
+                KeyStroke.getKeyStroke(
+                        KeyEvent.VK_S,
+                        InputEvent.CTRL_DOWN_MASK
+                )
+        );
+
         // Menüpunkt: Programm beenden
         JMenuItem exitItem = new JMenuItem("Exit");
-
         // Aktion: Canvas löschen
         newItem.addActionListener(e -> drawingPanel.clear());
         // Aktion: Datei laden
@@ -62,8 +98,11 @@ public class MainFrame extends JFrame {
         // Menüpunkt hinzufügen beenden
         fileMenu.add(exitItem);
 
+
         // Menü für Formauswahl
         JMenu shapeMenu = new JMenu("Shapes");
+        // Menü kann über die Tastatur mit ALT + S geöffnet werden
+        shapeMenu.setMnemonic(KeyEvent.VK_S);
         // Menüpunkt: Linie
         JMenuItem lineItem = new JMenuItem("Line");
         // Menüpunkt: Rechteck
@@ -85,17 +124,31 @@ public class MainFrame extends JFrame {
         // Menüpunkt Ellipse hinzufügen
         shapeMenu.add(ellipseItem);
 
+
         // Extra Funktionen Menü
         JMenu extraMenu = new JMenu("Extras");
+        // Menü kann über die Tastatur mit ALT + E geöffnet werden
+        extraMenu.setMnemonic(KeyEvent.VK_E);
+
         // Farbauswahl für die Formen (Color Picker)
         JMenuItem colorItem = new JMenuItem("Choose Color");
+        // Auswahl durch User verarbeiten
         colorItem.addActionListener(e -> {
-            Color c = JColorChooser.showDialog(this, "Choose Shape Color", drawingPanel.getCurrentColor());
-            if (c != null) drawingPanel.setCurrentColor(c);
+            Color c = JColorChooser.showDialog(
+                    this,
+                    "Choose Shape Color",
+                    drawingPanel.getCurrentColor()
+            );
+            // User hat keine Auswahl getroffen
+            if (c != null) {
+                drawingPanel.setCurrentColor(c);
+            }
         });
+
         // Undo-Funktion: letzte Form löschen
         JMenuItem undoItem = new JMenuItem("Undo Last Shape");
         undoItem.addActionListener(e -> drawingPanel.undoLastShape());
+
         // Radiergummi: Durch Anklicken Formen löschen
         JMenuItem eraserItem = new JMenuItem("Eraser Mode");
         eraserItem.addActionListener(e -> drawingPanel.enableEraserMode());
@@ -107,6 +160,7 @@ public class MainFrame extends JFrame {
         // Extra-Menüpunkt Radiergummi hinzufügen
         extraMenu.add(eraserItem);
 
+
         // Datei-Menü zur Menüleiste hinzufügen
         bar.add(fileMenu);
         // Shapes-Menü zur Menüleiste hinzufügen
@@ -117,10 +171,13 @@ public class MainFrame extends JFrame {
         return bar;
     }
 
+
     // Methode erzeugt die Symbolleiste
     private JToolBar createToolBar() {
+
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
+
 
         // Datei
         // Button erzeugen: Neu, Laden, Speichern und Beenden
@@ -144,6 +201,7 @@ public class MainFrame extends JFrame {
         // Trennlinie zwischen den Kategorien
         tb.addSeparator();
 
+
         // Formen
         // Button erzeugen: Linie, Rechteck, Ellipse
         JButton lineBtn = new JButton("Line");
@@ -163,24 +221,36 @@ public class MainFrame extends JFrame {
         // Trennlinie zwischen den Formen und Extras
         tb.addSeparator();
 
+
         // EXTRAS
         // Aktion: Farbe für die Formen setzen
         JButton colorBtn = new JButton("Color");
+
         // Farbe setzen
         colorBtn.addActionListener(e -> {
+
             // Dialog anzeigen und User Farbe bestimmen lassen
-            Color c = JColorChooser.showDialog(this, "Choose Shape Color", drawingPanel.getCurrentColor());
+            Color c = JColorChooser.showDialog(
+                    this,
+                    "Choose Shape Color",
+                    drawingPanel.getCurrentColor()
+            );
+
             // Hat der User ausgewählt, dann setzen
-            if (c != null) drawingPanel.setCurrentColor(c);
+            if (c != null) {
+                drawingPanel.setCurrentColor(c);
+            }
         });
 
         // Aktion: Undo setzen
         JButton undoBtn = new JButton("Undo");
+
         // Letzte Form zurücknehmen
         undoBtn.addActionListener(e -> drawingPanel.undoLastShape());
 
         // Aktion: Radiergummi setzen
         JButton eraserBtn = new JButton("Eraser");
+
         eraserBtn.addActionListener(e -> drawingPanel.enableEraserMode());
 
         // Btn (Button) hinzufügen: Farbauswahl, Rückkängig und Radiergummi
@@ -192,46 +262,99 @@ public class MainFrame extends JFrame {
         return tb;
     }
 
+
     // Methode zum Speichern der Shapes
     private void saveFile() {
+
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
 
         // Nur JPG-Dateien anzeigen
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG-Dateien (*.jpg)", "jpg", "jpeg");
+        FileNameExtensionFilter filter =
+                new FileNameExtensionFilter(
+                        "JPG-Dateien (*.jpg)",
+                        "jpg",
+                        "jpeg"
+                );
+
         // Filter für .jpg setzen
         chooser.setFileFilter(filter);
-
+        // Andere Dateitypen im Dialog ausblenden (nur .jpg anzeigen)
+        chooser.setAcceptAllFileFilterUsed(false);
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            // Dateiobjekt holen
             File file = chooser.getSelectedFile();
-
             // Falls der Benutzer keine Endung angegeben hat, .jpg ergänzen
             if (!file.getName().toLowerCase().endsWith(".jpg")
                     && !file.getName().toLowerCase().endsWith(".jpeg")) {
+
                 file = new File(file.getAbsolutePath() + ".jpg");
             }
-
-            FileManager.save(file, drawingPanel.getShapes());
+            try {
+                // BufferedImage aus dem DrawingPanel holen
+                BufferedImage image = drawingPanel.getImage();
+                // Bild als JPG-Datei speichern
+                ImageIO.write(image, "jpg", file);
+            } catch (IOException ex) {
+                // Fehlermeldung anzeigen, wenn Speichern nicht funktioniert
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Fehler beim Speichern der Datei.",
+                        "Fehler",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         }
     }
 
+
     // Methode zum Laden der Shapes
     private void loadFile() {
+
         // Datei-Dialog erzeugen
         JFileChooser chooser = new JFileChooser();
-
         // Nur JPG-Dateien anzeigen
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG-Dateien (*.jpg)", "jpg", "jpeg");
+        FileNameExtensionFilter filter =
+                new FileNameExtensionFilter(
+                        "JPG-Dateien (*.jpg)",
+                        "jpg",
+                        "jpeg"
+                );
+
         // Filter für .jpg setzen
         chooser.setFileFilter(filter);
-
+        // Andere Dateitypen im Dialog ausblenden
+        chooser.setAcceptAllFileFilterUsed(false);
         // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             // Dateiobjekt holen
             File file = chooser.getSelectedFile();
-            // Shapes laden und ins Panel setzen
-            drawingPanel.setShapes(FileManager.load(file));
+            try {
+                // PG-Datei als BufferedImage laden
+                BufferedImage image = ImageIO.read(file);
+                // Prüfen, ob das Bild erfolgreich geladen wurde
+                if (image != null) {
+                    // Geladenes Bild an das DrawingPanel übergeben
+                    drawingPanel.setImage(image);
+                } else {
+                    // Fehlermeldung bei ungültiger Bilddatei
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Die Datei konnte nicht als JPG-Bild geladen werden.",
+                            "Fehler",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            } catch (IOException ex) {
+                // Fehlermeldung anzeigen, wenn Laden nicht funktioniert
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Fehler beim Laden der Datei.",
+                        "Fehler",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         }
     }
 }
