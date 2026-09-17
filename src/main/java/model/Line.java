@@ -9,11 +9,25 @@ public class Line implements Shape, Serializable {
     private final Point start;
     // Endpunkt der Linie
     private final Point end;
-    // Konstruktor: setzt Start- und Endpunkt
+    // Farbe der Linie
+    private final Color color;
+    // Strichstärke der Linie
+    private final float strokeWidth;
+
+    // alte Konstruktor: setzt Start- und Endpunkt
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
+
+    // neuer Konstruktor: Start- und Endpunkt, Strichfarbe und Strichstärke
+    public Line(Point start, Point end, Color color, float strokeWidth) {
+        this.start = start;
+        this.end = end;
+        this.color = color;
+        this.strokeWidth = strokeWidth;
+    }
+
     // Getter für Startpunkt
     public Point getStart() {
         return start;
@@ -26,8 +40,22 @@ public class Line implements Shape, Serializable {
     @Override
     // Zeichnet die Linie mit Graphics2D
     public void draw(Graphics2D gLine) {
+        // Aktuelle Einstellungen sichern
+        Color oldColor = gLine.getColor();
+        Stroke oldStroke = gLine.getStroke();
+
+        // Farbe und Strichstärke setzen
+        gLine.setColor(color);
+        gLine.setStroke(new BasicStroke(strokeWidth));
+
+        // Linie zeichnen
         gLine.drawLine(start.x, start.y, end.x, end.y);
+
+        // Einstellungen wiederherstellen
+        gLine.setColor(oldColor);
+        gLine.setStroke(oldStroke);
     }
+
     @Override
     // kürzester Abstand zwischen dem tatsächlich gezeichnetem Segment berechnen
     public boolean containsPoint(int x, int y) {
@@ -41,8 +69,8 @@ public class Line implements Shape, Serializable {
                 // Angeklickter Punkt
                 x, y
         );
-        // Toleranz für Klick (Linien sind sehr dünn)
-        return distance <= 3.0;
+        // Toleranz für Klick (Linien sind sehr dünn, aber auch abhängig von der Strichstärke
+        return distance <= Math.max(5.0, strokeWidth / 2.0 + 3.0);
     }
 }
 
