@@ -14,13 +14,14 @@ public class Line implements Shape, Serializable {
     // Strichstärke der Linie
     private final float strokeWidth;
 
-    // alter Konstruktor: setzt Start- und Endpunkt
+    // Alter Konstruktor
+    // Wird weiterhin unterstützt, falls er an anderer Stelle verwendet wird.
     public Line(Point start, Point end) {
-        this.start = start;
-        this.end = end;
+        this(start, end, Color.BLACK, 1.0f);
     }
 
-    // neuer Konstruktor: Start- und Endpunkt, Strichfarbe und Strichstärke
+    // Neuer Konstruktor:
+    // Startpunkt, Endpunkt, Farbe und Strichstärke
     public Line(Point start, Point end, Color color, float strokeWidth) {
         this.start = start;
         this.end = end;
@@ -83,4 +84,3 @@ public class Line implements Shape, Serializable {
         return distance <= Math.max(5.0, strokeWidth / 2.0 + 3.0);
     }
 }
-

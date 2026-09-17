@@ -14,12 +14,14 @@ public class Ellipse implements Shape, Serializable {
     // Strichstärke der Linien des Rechtecks
     private final float strokeWidth;
 
-    // alter Konstruktor: setzt Start- und Endpunkt
+    // Alter Konstruktor
+    // Wird weiterhin unterstützt, falls er an anderer Stelle verwendet wird.
     public Ellipse(Point start, Point end) {
         this(start, end, Color.BLACK, 1.0f);
     }
 
-    // neuer Konstruktor: Start- und Endpunkt, Strichfarbe und Strichstärke
+    // Neuer Konstruktor:
+    // Startpunkt, Endpunkt, Farbe und Strichstärke
     public Ellipse(Point start, Point end, Color color, float strokeWidth) {
         this.start = start;
         this.end = end;

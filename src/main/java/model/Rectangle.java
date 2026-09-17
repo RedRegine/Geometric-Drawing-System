@@ -14,14 +14,15 @@ public class Rectangle implements Shape, Serializable {
     // Strichstärke der Linien des Rechtecks
     private final float strokeWidth;
 
-
-    // alter Konstruktor: setzt Start- und Endpunkt
+    // Alter Konstruktor
+    // Wird weiterhin unterstützt, falls er an anderer Stelle verwendet wird.
     public Rectangle(Point start, Point end) {
-        this.start = start;
-        this.end = end;
+        this(start, end, Color.BLACK, 1.0f);
     }
 
-    // neuer Konstruktor: Start- und Endpunkt, Strichfarbe und Strichstärke
+
+    // Neuer Konstruktor:
+    // Startpunkt, Endpunkt, Farbe und Strichstärke
     public Rectangle(Point start, Point end, Color color, float strokeWidth) {
         this.start = start;
         this.end = end;
@@ -90,5 +91,3 @@ public class Rectangle implements Shape, Serializable {
         return x >= minX && x <= maxX && y >= minY && y <= maxY;
     }
 }
-
-
