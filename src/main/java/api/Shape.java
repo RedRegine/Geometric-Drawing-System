@@ -7,4 +7,8 @@ public interface Shape {
     void draw(Graphics2D g);
     // Prüft, ob ein Punkt innerhalb der Form liegt (für Radiergummi)
     boolean containsPoint(int x, int y);
+    // Farbe der Form
+    Color getColor();
+    // Strichstärke der Form
+    float getStrokeWidth();
 }
