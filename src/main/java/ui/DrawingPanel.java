@@ -14,10 +14,15 @@ import java.util.List;
 
 // Zeichenpanel, das alle Formen rendert und Mausinteraktionen verarbeitet
 public class DrawingPanel extends JPanel {
+
     // Liste aller dauerhaft gespeicherten Shapes
     private final List<Shape> shapes = new ArrayList<>();
     // Aktuell ausgewählter Zeichentyp (Standard: Linie)
     private ShapeType currentType = ShapeType.LINE;
+    // Aktuelle Farbe (Standard: Schwarz)
+    private Color currentColor = Color.BLACK;
+    // Aktuelle Strichstärke (Standard: 1.0)
+    private float currentStrokeWidth = 1.0f;
     // Startpunkt beim Drücken der Maus
     private Point startPoint = null;
     // Aktueller Punkt während des Ziehens
@@ -108,15 +113,32 @@ public class DrawingPanel extends JPanel {
         addMouseMotionListener(mouseHandler);
     }
 
-    // Erzeugt ein Shape basierend auf dem aktuellen Typ und den Punkten
+    // Erzeugt ein Shape basierend auf dem aktuellen Typ und den Punkten mit gültigen Werten
     private Shape createShape(Point start, Point end) {
         switch (currentType) {
             case LINE:
-                return new Line(start, end);
+                return new Line(
+                        start,
+                        end,
+                        currentColor,
+                        currentStrokeWidth
+                );
+
             case RECTANGLE:
-                return new Rectangle(start, end);
+                return new Rectangle(
+                        start,
+                        end,
+                        currentColor,
+                        currentStrokeWidth
+                );
+
             case ELLIPSE:
-                return new Ellipse(start, end);
+                return new Ellipse(
+                        start,
+                        end,
+                        currentColor,
+                        currentStrokeWidth
+                );
             default:
                 return null;
         }
@@ -154,14 +176,15 @@ public class DrawingPanel extends JPanel {
 
     /* Extra-Menü Farbe setzen
     Extra aktuelle Farbe bestimmen */
-    private Color currentColor = Color.BLACK;
     // Getter für aktuelle Farbe
     public Color getCurrentColor() {
         return currentColor;
     }
     // Setter für das Setzen der Farbe
-    public void setCurrentColor(Color c) {
-        this.currentColor = c;
+    public void setCurrentColor(Color color) {
+        if (color != null) {
+            this.currentColor = color;
+        }
     }
 
     /* Extra Radiergummi: Form anklicken und entfernen
