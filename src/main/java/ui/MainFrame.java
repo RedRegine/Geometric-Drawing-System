@@ -413,9 +413,9 @@ public class MainFrame extends JFrame {
         // Ergebnisabfrage für den User
         int result = JOptionPane.showConfirmDialog(
                 this,
-                "Möchten Sie wirklich eine neue Datei anlegen?\n"
-                        + "Der aktuelle Inhalt wird gelöscht.",
-                "Neue Datei",
+                "Do you really want to create a new file??\n"
+                        + "The current content will be deleted.",
+                "New File",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE
         );
