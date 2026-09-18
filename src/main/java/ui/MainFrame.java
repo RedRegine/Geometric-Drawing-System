@@ -366,30 +366,41 @@ public class MainFrame extends JFrame {
         // Andere Dateitypen im Dialog ausblenden
         chooser.setAcceptAllFileFilterUsed(false);
         // Wenn der Benutzer eine Datei ausgewählt hat
+        // Wenn der Benutzer eine Datei ausgewählt hat
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            // Dateiobjekt holen
+            // Ausgewählte Datei holen
             File file = chooser.getSelectedFile();
+            // Prüfen, ob die Datei existiert
+            if (!file.exists() || !file.isFile()) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "The selected file does not exist.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
             try {
-                // PG-Datei als BufferedImage laden
+                // Bild laden
                 BufferedImage image = ImageIO.read(file);
-                // Prüfen, ob das Bild erfolgreich geladen wurde
-                if (image != null) {
-                    // Geladenes Bild an das DrawingPanel übergeben
-                    drawingPanel.setImage(image);
-                } else {
-                    // Fehlermeldung bei ungültiger Bilddatei
+                // Prüfen, ob die Datei tatsächlich ein gültiges Bild enthält
+                if (image == null) {
                     JOptionPane.showMessageDialog(
                             this,
-                            "The file could not be uploaded as a JPG image.",
+                            "The file does not contain a valid .jpg image.",
                             "Error",
                             JOptionPane.ERROR_MESSAGE
                     );
+                    return;
                 }
+                // Erst nach erfolgreichem Laden das aktuelle Bild ersetzen
+                drawingPanel.setImage(image);
             } catch (IOException ex) {
-                // Fehlermeldung anzeigen, wenn Laden nicht funktioniert
                 JOptionPane.showMessageDialog(
                         this,
-                        "Error loading the file.",
+                        "Error loading file:\n"
+                                + ex.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE
                 );
