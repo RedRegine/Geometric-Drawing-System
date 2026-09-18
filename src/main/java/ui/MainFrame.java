@@ -221,7 +221,6 @@ public class MainFrame extends JFrame {
         // Trennlinie zwischen den Formen und Extras
         tb.addSeparator();
 
-
         // EXTRAS
         // Aktion: Farbe für die Formen setzen
         JButton colorBtn = new JButton("Color");
@@ -272,7 +271,7 @@ public class MainFrame extends JFrame {
         // Nur JPG-Dateien anzeigen
         FileNameExtensionFilter filter =
                 new FileNameExtensionFilter(
-                        "JPG-Dateien (*.jpg)",
+                        "JPG-Files (*.jpg)",
                         "jpg",
                         "jpeg"
                 );
@@ -291,17 +290,57 @@ public class MainFrame extends JFrame {
 
                 file = new File(file.getAbsolutePath() + ".jpg");
             }
+
+            // Prüfen, ob die Datei bereits existiert
+            if (file.exists()) {
+                // User die Chance geben, die Datei zu überschreiben
+                int result = JOptionPane.showConfirmDialog(
+                        this,
+                        "The file already exists.\n"
+                                + "Would you like to overwrite them?",
+                        "Overwrite file.",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                // Wenn "Nein" gewählt wurde, Speichern abbrechen
+                if (result != JOptionPane.YES_OPTION) {
+                    return;
+                }
+            }
+
             try {
-                // BufferedImage aus dem DrawingPanel holen
                 BufferedImage image = drawingPanel.getImage();
-                // Bild als JPG-Datei speichern
-                ImageIO.write(image, "jpg", file);
+                // Prüfen, ob überhaupt ein Bild vorhanden ist
+                if (image == null) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "There is no image to save.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+
+                // Bild speichern
+                boolean success = ImageIO.write(image, "jpg", file);
+                // Prüfen, ob das Speichern tatsächlich erfolgreich war
+                if (!success) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "The image could not be saved.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+
             } catch (IOException ex) {
-                // Fehlermeldung anzeigen, wenn Speichern nicht funktioniert
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Fehler beim Speichern der Datei.",
-                        "Fehler",
+                        "Error saving the file:\n"
+                                + ex.getMessage(),
+                        "Error",
                         JOptionPane.ERROR_MESSAGE
                 );
             }
@@ -341,8 +380,8 @@ public class MainFrame extends JFrame {
                     // Fehlermeldung bei ungültiger Bilddatei
                     JOptionPane.showMessageDialog(
                             this,
-                            "Die Datei konnte nicht als JPG-Bild geladen werden.",
-                            "Fehler",
+                            "The file could not be uploaded as a JPG image.",
+                            "Error",
                             JOptionPane.ERROR_MESSAGE
                     );
                 }
@@ -350,8 +389,8 @@ public class MainFrame extends JFrame {
                 // Fehlermeldung anzeigen, wenn Laden nicht funktioniert
                 JOptionPane.showMessageDialog(
                         this,
-                        "Fehler beim Laden der Datei.",
-                        "Fehler",
+                        "Error loading the file.",
+                        "Error",
                         JOptionPane.ERROR_MESSAGE
                 );
             }
