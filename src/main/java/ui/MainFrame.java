@@ -80,8 +80,8 @@ public class MainFrame extends JFrame {
 
         // Menüpunkt: Programm beenden
         JMenuItem exitItem = new JMenuItem("Exit");
-        // Aktion: Canvas löschen
-        newItem.addActionListener(e -> drawingPanel.clear());
+        // Aktion: Canvas löschen mit Abfrage an den User
+        newItem.addActionListener(e -> newFile());
         // Aktion: Datei laden
         loadItem.addActionListener(e -> loadFile());
         // Aktion: Datei speichern
@@ -187,7 +187,7 @@ public class MainFrame extends JFrame {
         JButton exitBtn = new JButton("Exit");
 
         // Aktionen ausführen (Klick = Trigger) : Neu, Laden, Speichern und Beenden
-        newBtn.addActionListener(e -> drawingPanel.clear());
+        newBtn.addActionListener(e -> newFile());
         loadBtn.addActionListener(e -> loadFile());
         saveBtn.addActionListener(e -> saveFile());
         exitBtn.addActionListener(e -> System.exit(0));
@@ -355,6 +355,24 @@ public class MainFrame extends JFrame {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
+        }
+    }
+
+    // Methode zum Anlegen einer neuen Datei
+    private void newFile() {
+        // Ergebnisabfrage für den User
+        int result = JOptionPane.showConfirmDialog(
+                this,
+                "Möchten Sie wirklich eine neue Datei anlegen?\n"
+                        + "Der aktuelle Inhalt wird gelöscht.",
+                "Neue Datei",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        // Nur wenn der Benutzer "Ja" auswählt, wird die Zeichenfläche geleert
+        if (result == JOptionPane.YES_OPTION) {
+            drawingPanel.clear();
         }
     }
 }
