@@ -178,13 +178,36 @@ public class MainFrame extends JFrame {
         // Symbolleiste erzeugen
         JToolBar tb = new JToolBar();
 
-
         // Datei
-        // Button erzeugen: Neu, Laden, Speichern und Beenden
-        JButton newBtn = new JButton("New");
-        JButton loadBtn = new JButton("Load");
-        JButton saveBtn = new JButton("Save");
+        // Button mit Symbolen erzeugen: Neu, Laden, Speichern und Beenden
+        // Neue Datei: mit Symbol aus jlfgr-1_0.jar
+        JButton newBtn = new JButton();
+        newBtn.setIcon(new ImageIcon(
+                getClass().getResource(
+                        "/toolbarButtonGraphics/general/New16.gif"
+                )
+        ));
+        newBtn.setToolTipText("New");
+        // Laden: mit Symbol aus jlfgr-1_0.jar
+        JButton loadBtn = new JButton();
+        loadBtn.setIcon(new ImageIcon(
+                getClass().getResource(
+                        "/toolbarButtonGraphics/general/Open16.gif"
+                )
+        ));
+        loadBtn.setToolTipText("Load");
+        // Speichern: mit Symbol aus jlfgr-1_0.jar
+        JButton saveBtn = new JButton();
+        saveBtn.setIcon(new ImageIcon(
+                getClass().getResource(
+                        "/toolbarButtonGraphics/general/Save16.gif"
+                )
+        ));
+        saveBtn.setToolTipText("Save");
+
+        // Exit bleibt zunächst ein Text-Button
         JButton exitBtn = new JButton("Exit");
+        exitBtn.setToolTipText("Exit");
 
         // Aktionen ausführen (Klick = Trigger) : Neu, Laden, Speichern und Beenden
         newBtn.addActionListener(e -> newFile());
