@@ -222,7 +222,9 @@ public class MainFrame extends JFrame {
         rectBtn.setIcon(new ShapeIcon(ShapeIcon.Type.RECTANGLE));
         rectBtn.setToolTipText("Rectangle");
         // Button erzeugen: Ellipse mit der Klasse ShapeIcon
-        JButton ellipseBtn = new JButton("Ellipse");
+        JButton ellipseBtn = new JButton();
+        ellipseBtn.setIcon(new ShapeIcon(ShapeIcon.Type.ELLIPSE));
+        ellipseBtn.setToolTipText("Ellipse");
 
         // Aktionen ausführen (Klick = Trigger) : Linie, Rechteck oder Ellipse setzen
         lineBtn.addActionListener(e -> drawingPanel.setCurrentType(ShapeType.LINE));
