@@ -180,32 +180,20 @@ public class MainFrame extends JFrame {
 
         // Datei
         // Button mit Symbolen erzeugen: Neu, Laden, Speichern und Beenden
-        // Neue Datei: mit Symbol aus jlfgr-1_0.jar
+        // Button Neue Datei: mit Symbol aus jlfgr-1_0.jar
         JButton newBtn = new JButton();
-        newBtn.setIcon(new ImageIcon(
-                getClass().getResource(
-                        "/toolbarButtonGraphics/general/New16.gif"
-                )
-        ));
+        newBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/New16.gif")));
         newBtn.setToolTipText("New");
-        // Laden: mit Symbol aus jlfgr-1_0.jar
+        // Button Laden: mit Symbol aus jlfgr-1_0.jar
         JButton loadBtn = new JButton();
-        loadBtn.setIcon(new ImageIcon(
-                getClass().getResource(
-                        "/toolbarButtonGraphics/general/Open16.gif"
-                )
-        ));
+        loadBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Open16.gif")));
         loadBtn.setToolTipText("Load");
-        // Speichern: mit Symbol aus jlfgr-1_0.jar
+        // Button Speichern: mit Symbol aus jlfgr-1_0.jar
         JButton saveBtn = new JButton();
-        saveBtn.setIcon(new ImageIcon(
-                getClass().getResource(
-                        "/toolbarButtonGraphics/general/Save16.gif"
-                )
-        ));
+        saveBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Save16.gif")));
         saveBtn.setToolTipText("Save");
 
-        // Exit bleibt zunächst ein Text-Button
+        // Button Exit bleibt zunächst ein Text-Button
         JButton exitBtn = new JButton("Exit");
         exitBtn.setToolTipText("Exit");
 
@@ -223,7 +211,6 @@ public class MainFrame extends JFrame {
 
         // Trennlinie zwischen den Kategorien
         tb.addSeparator();
-
 
         // Formen
         // Button erzeugen: Linie, Rechteck, Ellipse
@@ -245,12 +232,10 @@ public class MainFrame extends JFrame {
         tb.addSeparator();
 
         // EXTRAS
-        // Aktion: Farbe für die Formen setzen
+        // Button Farbe für die Formen setzen
         JButton colorBtn = new JButton("Color");
-
-        // Farbe setzen
+        // Aktion: Farbe setzen
         colorBtn.addActionListener(e -> {
-
             // Dialog anzeigen und User Farbe bestimmen lassen
             Color c = JColorChooser.showDialog(
                     this,
@@ -264,15 +249,14 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // Aktion: Undo setzen
+        // Button Undo setzen
         JButton undoBtn = new JButton("Undo");
-
-        // Letzte Form zurücknehmen
+        // Aktion: Letzte Form zurücknehmen
         undoBtn.addActionListener(e -> drawingPanel.undoLastShape());
 
-        // Aktion: Radiergummi setzen
+        // Button Radiergummi setzen
         JButton eraserBtn = new JButton("Eraser");
-
+        // Aktion: Eine Form aus dem Bild entfernen
         eraserBtn.addActionListener(e -> drawingPanel.enableEraserMode());
 
         // Btn (Button) hinzufügen: Farbauswahl, Rückkängig und Radiergummi
