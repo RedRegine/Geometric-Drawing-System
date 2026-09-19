@@ -78,9 +78,8 @@ public class ShapeIcon implements Icon {
                         x + padding + width,
                         y + padding
                 );
-
-                // Beendet diesen case
                 break;
+
             // Symbol für ein Rechteck
             case RECTANGLE:
                 // Zeichnet ein Rechteck
@@ -90,8 +89,8 @@ public class ShapeIcon implements Icon {
                         width,
                         height
                 ));
-                // Beendet diesen case
                 break;
+
             // Symbol für eine Ellipse
             case ELLIPSE:
                 // Zeichnet eine Ellipse
@@ -101,8 +100,8 @@ public class ShapeIcon implements Icon {
                         width,
                         height
                 ));
-                // Beendet diesen case
                 break;
+
             // Symbol für Undo
             case UNDO:
                 // Zeichnet einen gebogenen Pfeil für die Rückgängig-Funktion
@@ -127,8 +126,8 @@ public class ShapeIcon implements Icon {
                         x + 12,
                         y + 5
                 );
-                // Beendet diesen case
                 break;
+
             // Symbol für den Radiergummi
             case ERASER:
                 // Zeichnet den Körper des Radiergummis
@@ -147,8 +146,8 @@ public class ShapeIcon implements Icon {
                         x + 17,
                         y + 16
                 );
-                // Beendet diesen case
                 break;
+
             // Symbol für die Farbauswahl
             case COLOR:
                 // Zeichnet einen Kreis als Symbol für die Farbauswahl
@@ -165,8 +164,8 @@ public class ShapeIcon implements Icon {
                         4,
                         4
                 );
-                // Beendet diesen case
                 break;
+
             // Symbol zum Beenden des Programms
             case EXIT:
                 // Zeichnet eine Linie von links oben nach rechts unten
@@ -183,8 +182,8 @@ public class ShapeIcon implements Icon {
                         x + 6,
                         y + 18
                 );
-                // Beendet diesen case
                 break;
+
         }
         // Gibt die erzeugte Graphics-Kopie wieder frei
         g2.dispose();

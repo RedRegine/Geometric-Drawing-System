@@ -183,19 +183,26 @@ public class MainFrame extends JFrame {
         // Button Neue Datei: mit Symbol aus jlfgr-1_0.jar
         JButton newBtn = new JButton();
         newBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/New16.gif")));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         newBtn.setToolTipText("New");
         // Button Laden: mit Symbol aus jlfgr-1_0.jar
         JButton loadBtn = new JButton();
         loadBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Open16.gif")));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         loadBtn.setToolTipText("Load");
         // Button Speichern: mit Symbol aus jlfgr-1_0.jar
         JButton saveBtn = new JButton();
         saveBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Save16.gif")));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         saveBtn.setToolTipText("Save");
 
-        // Button Exit bleibt zunächst ein Text-Button
-        JButton exitBtn = new JButton("Exit");
+        // Button zum Beenden des Programms erzeugen
+        JButton exitBtn = new JButton();
+        // Eigenes EXIT-Symbol setzen
+        exitBtn.setIcon(new ShapeIcon(ShapeIcon.Type.EXIT));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         exitBtn.setToolTipText("Exit");
+
 
         // Aktionen ausführen (Klick = Trigger) : Neu, Laden, Speichern und Beenden
         newBtn.addActionListener(e -> newFile());
@@ -215,15 +222,21 @@ public class MainFrame extends JFrame {
         // Formen
         // Button erzeugen: Linie mit der Klasse ShapeIcon
         JButton lineBtn = new JButton();
+        // Eigenes LINE-Symbol setzen
         lineBtn.setIcon(new ShapeIcon(ShapeIcon.Type.LINE));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         lineBtn.setToolTipText("Line");
         // Button erzeugen: Rechteck mit der Klasse ShapeIcon
         JButton rectBtn = new JButton();
+        // Eigenes RECTANGLE-Symbol setzen
         rectBtn.setIcon(new ShapeIcon(ShapeIcon.Type.RECTANGLE));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         rectBtn.setToolTipText("Rectangle");
         // Button erzeugen: Ellipse mit der Klasse ShapeIcon
         JButton ellipseBtn = new JButton();
+        // Eigenes ELLIPSE-Symbol setzen
         ellipseBtn.setIcon(new ShapeIcon(ShapeIcon.Type.ELLIPSE));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
         ellipseBtn.setToolTipText("Ellipse");
 
         // Aktionen ausführen (Klick = Trigger) : Linie, Rechteck oder Ellipse setzen
@@ -240,8 +253,12 @@ public class MainFrame extends JFrame {
         tb.addSeparator();
 
         // EXTRAS
-        // Button Farbe für die Formen setzen
-        JButton colorBtn = new JButton("Color");
+        // Button für die Farbauswahl erzeugen
+        JButton colorBtn = new JButton();
+        // Eigenes Farbsymbol setzen
+        colorBtn.setIcon(new ShapeIcon(ShapeIcon.Type.COLOR));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
+        colorBtn.setToolTipText("Color");
         // Aktion: Farbe setzen
         colorBtn.addActionListener(e -> {
             // Dialog anzeigen und User Farbe bestimmen lassen
@@ -257,13 +274,21 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // Button Undo setzen
-        JButton undoBtn = new JButton("Undo");
+        // Button für die Undo-Funktion erzeugen
+        JButton undoBtn = new JButton();
+        // Eigenes UNDO-Symbol setzen
+        undoBtn.setIcon(new ShapeIcon(ShapeIcon.Type.UNDO));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
+        undoBtn.setToolTipText("Undo");
         // Aktion: Letzte Form zurücknehmen
         undoBtn.addActionListener(e -> drawingPanel.undoLastShape());
 
-        // Button Radiergummi setzen
-        JButton eraserBtn = new JButton("Eraser");
+        // Button für den Radiergummi erzeugen
+        JButton eraserBtn = new JButton();
+        // Eigenes ERASER-Symbol setzen
+        eraserBtn.setIcon(new ShapeIcon(ShapeIcon.Type.ERASER));
+        // Beschreibung anzeigen, wenn die Maus über dem Button steht
+        eraserBtn.setToolTipText("Eraser");
         // Aktion: Eine Form aus dem Bild entfernen
         eraserBtn.addActionListener(e -> drawingPanel.enableEraserMode());
 
