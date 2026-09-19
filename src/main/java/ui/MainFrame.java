@@ -213,9 +213,15 @@ public class MainFrame extends JFrame {
         tb.addSeparator();
 
         // Formen
-        // Button erzeugen: Linie, Rechteck, Ellipse
-        JButton lineBtn = new JButton("Line");
-        JButton rectBtn = new JButton("Rectangle");
+        // Button erzeugen: Linie mit der Klasse ShapeIcon
+        JButton lineBtn = new JButton();
+        lineBtn.setIcon(new ShapeIcon(ShapeIcon.Type.LINE));
+        lineBtn.setToolTipText("Line");
+        // Button erzeugen: Rechteck mit der Klasse ShapeIcon
+        JButton rectBtn = new JButton();
+        rectBtn.setIcon(new ShapeIcon(ShapeIcon.Type.RECTANGLE));
+        rectBtn.setToolTipText("Rectangle");
+        // Button erzeugen: Ellipse mit der Klasse ShapeIcon
         JButton ellipseBtn = new JButton("Ellipse");
 
         // Aktionen ausführen (Klick = Trigger) : Linie, Rechteck oder Ellipse setzen

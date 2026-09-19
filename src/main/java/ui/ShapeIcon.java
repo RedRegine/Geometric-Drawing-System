@@ -3,6 +3,7 @@ package ui; // UI-Paket: enthält alle Klassen der grafischen Oberfläche
 import javax.swing.Icon; // Importiert das Interface für Swing-Symbole
 import java.awt.Component; // Importiert das Interface für Swing-Symbole
 import java.awt.Graphics; // Grundlegende Zeichenfunktionen
+import java.awt.Color; // Ermöglicht das Festlegen der Zeichenfarbe
 import java.awt.Graphics2D; // Erweiterte Zeichenfunktionen für Java2D
 import java.awt.BasicStroke; // Ermöglicht das Festlegen der Linienbreite
 import java.awt.Rectangle; // Ermöglicht das Festlegen der Linienbreite
@@ -51,6 +52,8 @@ public class ShapeIcon implements Icon {
 
         // Erstellt eine Kopie des Graphics-Objekts, damit die ursprünglichen Grafikeinstellungen nicht verändert werden
         Graphics2D g2 = (Graphics2D) g.create();
+        // Setzt die Farbe des Symbols auf Schwarz
+        g2.setColor(Color.BLACK);
         // Legt die Stärke der gezeichneten Linien auf 2 Pixel fest
         g2.setStroke(new BasicStroke(2));
         // Abstand des Symbols vom Rand des Icons
