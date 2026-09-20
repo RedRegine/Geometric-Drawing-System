@@ -1,6 +1,5 @@
 package logic; // Logic-Paket: enthält logische Komponenten des Programms
 
-
 // Factory-Klasse zur Umwandlung eines String-Wertes in einen ShapeType
 public class ShapeFactory {
 
