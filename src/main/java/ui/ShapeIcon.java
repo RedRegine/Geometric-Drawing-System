@@ -1,20 +1,21 @@
 package ui; // UI-Paket: enthält alle Klassen der grafischen Oberfläche
 
 import javax.swing.Icon; // Importiert das Interface für Swing-Symbole
-import java.awt.Component; // Importiert das Interface für Swing-Symbole
+import java.awt.Component; // Importiert die Komponente, auf der das Icon dargestellt wird
 import java.awt.Graphics; // Grundlegende Zeichenfunktionen
 import java.awt.Color; // Ermöglicht das Festlegen der Zeichenfarbe
 import java.awt.Graphics2D; // Erweiterte Zeichenfunktionen für Java2D
-import java.awt.BasicStroke; // Ermöglicht das Festlegen der Linienbreite
-import java.awt.Rectangle; // Ermöglicht das Festlegen der Linienbreite
-import java.awt.geom.Ellipse2D; // Wird zum Zeichnen einer Ellipse verwendet
-
+import java.awt.BasicStroke; // Ermöglicht das Festlegen der Linienbreite und Linienenden
+import java.awt.geom.Rectangle2D; // Ermöglicht das Zeichnen eines Rechtecks
+import java.awt.geom.Ellipse2D; // Ermöglicht das Zeichnen einer Ellipse
+import java.awt.geom.Path2D; // Ermöglicht das Zeichnen eines Pfades für komplexere Symbole
+import java.awt.geom.AffineTransform; // Ermöglicht das Drehen einzelner Zeichenoperationen
 
 // Klasse für die Symbole der Zeichenwerkzeuge
 // Die Klasse implementiert das Swing-Interface Icon
 public class ShapeIcon implements Icon {
 
-    // Aufzählung der verschiedenen Formen, für die ein Symbol dargestellt werden kann
+    // Aufzählung der verschiedenen Symbole
     public enum Type {
         LINE,
         RECTANGLE,
@@ -25,11 +26,11 @@ public class ShapeIcon implements Icon {
         EXIT
     }
 
-    // Speichert den Typ der Form, die durch dieses Icon dargestellt werden soll
+    // Speichert den Typ des darzustellenden Symbols
     private final Type type;
 
     // Konstruktor der Klasse
-    // Übernimmt den gewünschten Formtyp
+    // Übernimmt den gewünschten Symboltyp
     public ShapeIcon(Type type) {
         this.type = type;
     }
@@ -48,140 +49,118 @@ public class ShapeIcon implements Icon {
 
     // Methode die von Swing aufgerufen wird, wenn das Icon gezeichnet werden soll
     @Override
-    public void paintIcon(
-            Component c,
-            Graphics g,
-            int x,
-            int y) {
-
+    public void paintIcon(Component c, Graphics g, int x, int y) {
         // Erstellt eine Kopie des Graphics-Objekts, damit die ursprünglichen Grafikeinstellungen nicht verändert werden
         Graphics2D g2 = (Graphics2D) g.create();
+        // Aktiviert Kantenglättung für ein sauberes und professionelles Erscheinungsbild
+        g2.setRenderingHint( java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON );
         // Setzt die Farbe des Symbols auf Schwarz
         g2.setColor(Color.BLACK);
         // Legt die Stärke der gezeichneten Linien auf 2 Pixel fest
-        g2.setStroke(new BasicStroke(2));
-        // Abstand des Symbols vom Rand des Icons
-        int padding = 4;
-        // Breite der eigentlichen Form
-        int width = 16;
-        // Höhe der eigentlichen Form
-        int height = 16;
-        // Prüft, welcher Formtyp für dieses Icon ausgewählt wurde
+        // ROUND sorgt für abgerundete Linienenden & weichere Übergänge bei den Symbolen
+        g2.setStroke(new BasicStroke( 2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND ));
+        // Mittelpunkt des 24x24 Icons
+        int centerX = x + 12;
+        int centerY = y + 12;
+
         // Prüft, welches Symbol für diesen Button dargestellt werden soll
         switch (type) {
-            // Symbol für eine Linie
+
+            // Symbol für Linie
             case LINE:
                 // Zeichnet eine diagonale Linie
-                g2.drawLine(
-                        x + padding,
-                        y + padding + height,
-                        x + padding + width,
-                        y + padding
-                );
+                // Die Linie ist bewusst etwas kleiner als das gesamte Icon, sonst liegt sie direkt am Rand
+                g2.drawLine( x + 5, y + 19, x + 19, y + 5 );
                 break;
 
-            // Symbol für ein Rechteck
+            // Symbol für Rechteck
             case RECTANGLE:
-                // Zeichnet ein Rechteck
-                g2.draw(new Rectangle(
-                        x + padding,
-                        y + padding,
-                        width,
-                        height
-                ));
+                // Durch die Verwendung von Rectangle2D können halbe Pixel vermieden und die Darstellung sauber gehalten werden
+                g2.draw(new Rectangle2D.Double( x + 5, y + 5, 14, 14 ));
                 break;
 
-            // Symbol für eine Ellipse
+            // Symbol für Ellipse
             case ELLIPSE:
-                // Zeichnet eine Ellipse
-                g2.draw(new Ellipse2D.Double(
-                        x + padding,
-                        y + padding,
-                        width,
-                        height
-                ));
+                // Zeichnet eine Ellipse mit derselben Außenabmessung (wie Rechteck)
+                g2.draw(new Ellipse2D.Double( x + 5, y + 5, 14, 14 ));
                 break;
 
             // Symbol für Undo
             case UNDO:
-                // Zeichnet einen gebogenen Pfeil für die Rückgängig-Funktion
-                g2.drawArc(
-                        x + 5,
-                        y + 5,
-                        14,
-                        14,
-                        45,
-                        270
-                );
+                // Erstellt einen Pfad für den gebogenen Undo-Pfeil
+                Path2D undoPath = new Path2D.Double();
+                // Startpunkt des Pfeils
+                undoPath.moveTo( x + 7, y + 9 );
+                // Zeichnet eine geschwungene Linie nach rechts
+                undoPath.curveTo( x + 11, y + 5, x + 18, y + 6, x + 18, y + 12 );
+                // Zeichnet den unteren Teil des Pfeilbogens
+                undoPath.curveTo( x + 18, y + 16, x + 15, y + 18, x + 11, y + 18 );
+                // Zeichnet den gebogenen Pfeil
+                g2.draw(undoPath);
+                // Erstellt die Pfeilspitze
+                Path2D undoArrow = new Path2D.Double();
+                // Oberer Punkt der Pfeilspitze
+                undoArrow.moveTo( x + 7, y + 9 );
+                // Linker Punkt der Pfeilspitze
+                undoArrow.lineTo( x + 12, y + 5 );
+                // Unterer Punkt der Pfeilspitze
+                undoArrow.lineTo( x + 11, y + 11 );
+                // Schließt die Pfeilspitze
+                undoArrow.closePath();
                 // Zeichnet die Pfeilspitze
-                g2.drawLine(
-                        x + 5,
-                        y + 12,
-                        x + 5,
-                        y + 5
-                );
-                g2.drawLine(
-                        x + 5,
-                        y + 5,
-                        x + 12,
-                        y + 5
-                );
+                g2.fill(undoArrow);
                 break;
 
-            // Symbol für den Radiergummi
+            // Symbol für Radiergummi
             case ERASER:
-                // Zeichnet den Körper des Radiergummis
-                g2.drawRoundRect(
-                        x + 5,
-                        y + 7,
-                        14,
-                        9,
-                        2,
-                        2
-                );
-                // Zeichnet eine diagonale Linie über den Radiergummi
-                g2.drawLine(
-                        x + 8,
-                        y + 7,
-                        x + 17,
-                        y + 16
-                );
+                // Speichert die aktuelle Transformation
+                AffineTransform oldTransform = g2.getTransform();
+                // Verschiebt den Ursprung in die Mitte des Icons
+                g2.translate(centerX, centerY);
+                // Dreht den Radiergummi leicht diagonal, die Darstellung gleicht dadurch mehr bekannten Zeichenprogrammen
+                g2.rotate(Math.toRadians(-45));
+                // Zeichnet den äußeren Körper des Radiergummis
+                g2.drawRoundRect( -8, -5, 16, 10, 3, 3 );
+                // Zeichnet eine Trennlinie im Radiergummi
+                g2.drawLine( 1, -5, 1, 5 );
+                // Stellt die ursprüngliche Transformation wieder her
+                g2.setTransform(oldTransform);
                 break;
 
-            // Symbol für die Farbauswahl
+            // Symbol für Farbauswahl
             case COLOR:
-                // Zeichnet einen Kreis als Symbol für die Farbauswahl
-                g2.drawOval(
-                        x + 5,
-                        y + 5,
-                        14,
-                        14
-                );
-                // Zeichnet einen kleinen inneren Punkt
-                g2.fillOval(
-                        x + 10,
-                        y + 10,
-                        4,
-                        4
-                );
+                // Zeichnet eine kleine Farbpalette
+                Path2D palette = new Path2D.Double();
+                // Startpunkt der Palette
+                palette.moveTo( x + 7, y + 15 );
+                // Linke Seite der Palette
+                palette.curveTo( x + 4, y + 12, x + 5, y + 8, x + 8, y + 6 );
+                // Oberer Bereich der Palette
+                palette.curveTo( x + 12, y + 3, x + 18, y + 5, x + 19, y + 9 );
+                // Rechter Bereich der Palette
+                palette.curveTo( x + 20, y + 13, x + 17, y + 16, x + 14, y + 17 );
+                // Unterer Bereich der Palette
+                palette.curveTo( x + 12, y + 18, x + 10, y + 17, x + 8, y + 16 );
+                // Schließt die Palette
+                palette.closePath();
+                // Zeichnet die Außenkontur der Palette
+                g2.draw(palette);
+                // Zeichnet kleine Farbpunkte auf der Palette
+                g2.fillOval( x + 8, y + 8, 3, 3 );
+                // Zeichnet zweiten Farbpunkt
+                g2.fillOval( x + 13, y + 6, 3, 3 );
+                // Zeichnet dritten Farbpunkt
+                g2.fillOval( x + 15, y + 11, 3, 3 );
+                // Zeichnet vierten Farbpunkt
+                g2.fillOval( x + 10, y + 12, 3, 3 );
                 break;
 
-            // Symbol zum Beenden des Programms
+            // Symbol für Beenden
             case EXIT:
-                // Zeichnet eine Linie von links oben nach rechts unten
-                g2.drawLine(
-                        x + 6,
-                        y + 6,
-                        x + 18,
-                        y + 18
-                );
-                // Zeichnet eine Linie von rechts oben nach links unten
-                g2.drawLine(
-                        x + 18,
-                        y + 6,
-                        x + 6,
-                        y + 18
-                );
+                // Zeichnet den ersten diagonalen Strich des X
+                g2.drawLine( x + 6, y + 6, x + 18, y + 18 );
+                // Zeichnet den zweiten diagonalen Strich des X
+                g2.drawLine( x + 18, y + 6, x + 6, y + 18 );
                 break;
 
         }

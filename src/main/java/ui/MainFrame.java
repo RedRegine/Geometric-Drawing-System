@@ -1,7 +1,6 @@
 package ui; // Paket für alle UI-bezogenen Klassen
 
 import logic.ShapeType; // Import des Enums für die Formtypen
-
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
 import javax.swing.filechooser.FileNameExtensionFilter; // nur Dateien vom Typ JPG anzeigen
 import javax.imageio.ImageIO; // zum Laden und Speichern von Bildern
