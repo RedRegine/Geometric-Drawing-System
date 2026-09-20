@@ -4,7 +4,6 @@ import logic.ShapeType; // Import des Enums für die Formtypen
 import javax.swing.*; // Swing-Komponenten: JFrame, JMenu, JMenuItem, JMenuBar, JButton, JToolBar
 import javax.swing.filechooser.FileNameExtensionFilter; // nur Dateien vom Typ JPG anzeigen
 import javax.imageio.ImageIO; // zum Laden und Speichern von Bildern
-
 import java.awt.*; // AWT für Layouts (BorderLayout)
 import java.awt.event.KeyEvent; // für Tastaturkürzel
 import java.awt.event.InputEvent; // für Tastaturkürzel mit STRG
@@ -181,17 +180,17 @@ public class MainFrame extends JFrame {
         // Button mit Symbolen erzeugen: Neu, Laden, Speichern und Beenden
         // Button Neue Datei: mit Symbol aus jlfgr-1_0.jar
         JButton newBtn = new JButton();
-        newBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/New16.gif")));
+        newBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/New24.gif")));
         // Beschreibung anzeigen, wenn die Maus über dem Button steht
         newBtn.setToolTipText("New");
         // Button Laden: mit Symbol aus jlfgr-1_0.jar
         JButton loadBtn = new JButton();
-        loadBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Open16.gif")));
+        loadBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Open24.gif")));
         // Beschreibung anzeigen, wenn die Maus über dem Button steht
         loadBtn.setToolTipText("Load");
         // Button Speichern: mit Symbol aus jlfgr-1_0.jar
         JButton saveBtn = new JButton();
-        saveBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Save16.gif")));
+        saveBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Save24.gif")));
         // Beschreibung anzeigen, wenn die Maus über dem Button steht
         saveBtn.setToolTipText("Save");
 
@@ -275,8 +274,8 @@ public class MainFrame extends JFrame {
 
         // Button für die Undo-Funktion erzeugen
         JButton undoBtn = new JButton();
-        // Eigenes UNDO-Symbol setzen
-        undoBtn.setIcon(new ShapeIcon(ShapeIcon.Type.UNDO));
+        // Button UNDO: mit Symbol aus jlfgr-1_0.jar
+        undoBtn.setIcon(new ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Undo24.gif")));
         // Beschreibung anzeigen, wenn die Maus über dem Button steht
         undoBtn.setToolTipText("Undo");
         // Aktion: Letzte Form zurücknehmen

@@ -20,7 +20,6 @@ public class ShapeIcon implements Icon {
         LINE,
         RECTANGLE,
         ELLIPSE,
-        UNDO,
         ERASER,
         COLOR,
         EXIT
@@ -85,31 +84,6 @@ public class ShapeIcon implements Icon {
                 g2.draw(new Ellipse2D.Double( x + 5, y + 5, 14, 14 ));
                 break;
 
-            // Symbol für Undo
-            case UNDO:
-                // Erstellt einen Pfad für den gebogenen Undo-Pfeil
-                Path2D undoPath = new Path2D.Double();
-                // Startpunkt des Pfeils
-                undoPath.moveTo( x + 7, y + 9 );
-                // Zeichnet eine geschwungene Linie nach rechts
-                undoPath.curveTo( x + 11, y + 5, x + 18, y + 6, x + 18, y + 12 );
-                // Zeichnet den unteren Teil des Pfeilbogens
-                undoPath.curveTo( x + 18, y + 16, x + 15, y + 18, x + 11, y + 18 );
-                // Zeichnet den gebogenen Pfeil
-                g2.draw(undoPath);
-                // Erstellt die Pfeilspitze
-                Path2D undoArrow = new Path2D.Double();
-                // Oberer Punkt der Pfeilspitze
-                undoArrow.moveTo( x + 7, y + 9 );
-                // Linker Punkt der Pfeilspitze
-                undoArrow.lineTo( x + 12, y + 5 );
-                // Unterer Punkt der Pfeilspitze
-                undoArrow.lineTo( x + 11, y + 11 );
-                // Schließt die Pfeilspitze
-                undoArrow.closePath();
-                // Zeichnet die Pfeilspitze
-                g2.fill(undoArrow);
-                break;
 
             // Symbol für Radiergummi
             case ERASER:
