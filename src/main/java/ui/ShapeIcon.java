@@ -8,7 +8,6 @@ import java.awt.Graphics2D; // Erweiterte Zeichenfunktionen für Java2D
 import java.awt.BasicStroke; // Ermöglicht das Festlegen der Linienbreite und Linienenden
 import java.awt.geom.Rectangle2D; // Ermöglicht das Zeichnen eines Rechtecks
 import java.awt.geom.Ellipse2D; // Ermöglicht das Zeichnen einer Ellipse
-import java.awt.geom.Path2D; // Ermöglicht das Zeichnen eines Pfades für komplexere Symbole
 import java.awt.geom.AffineTransform; // Ermöglicht das Drehen einzelner Zeichenoperationen
 
 // Klasse für die Symbole der Zeichenwerkzeuge
@@ -103,30 +102,34 @@ public class ShapeIcon implements Icon {
 
             // Symbol für Farbauswahl
             case COLOR:
-                // Zeichnet eine kleine Farbpalette
-                Path2D palette = new Path2D.Double();
-                // Startpunkt der Palette
-                palette.moveTo( x + 7, y + 15 );
-                // Linke Seite der Palette
-                palette.curveTo( x + 4, y + 12, x + 5, y + 8, x + 8, y + 6 );
-                // Oberer Bereich der Palette
-                palette.curveTo( x + 12, y + 3, x + 18, y + 5, x + 19, y + 9 );
-                // Rechter Bereich der Palette
-                palette.curveTo( x + 20, y + 13, x + 17, y + 16, x + 14, y + 17 );
-                // Unterer Bereich der Palette
-                palette.curveTo( x + 12, y + 18, x + 10, y + 17, x + 8, y + 16 );
-                // Schließt die Palette
-                palette.closePath();
-                // Zeichnet die Außenkontur der Palette
-                g2.draw(palette);
-                // Zeichnet kleine Farbpunkte auf der Palette
-                g2.fillOval( x + 8, y + 8, 3, 3 );
-                // Zeichnet zweiten Farbpunkt
-                g2.fillOval( x + 13, y + 6, 3, 3 );
-                // Zeichnet dritten Farbpunkt
-                g2.fillOval( x + 15, y + 11, 3, 3 );
-                // Zeichnet vierten Farbpunkt
-                g2.fillOval( x + 10, y + 12, 3, 3 );
+                // Weiße Palette mit dunkler Kontur
+                g2.setColor(Color.WHITE);
+                g2.fillOval(x + 3, y + 4, 18, 17);
+                // Palettenform
+                g2.setColor(new Color(45, 45, 45));
+                g2.drawOval(x + 3, y + 4, 18, 17);
+                // Hintergrund der Komponente ermitteln,
+                // auf der das Icon dargestellt wird
+                Color background = c.getBackground();
+                // Aussparung für die typische Farbpalettenform
+                g2.setColor(background);
+                g2.fillOval(x + 15, y + 15, 7, 7);
+                // Farbige Punkte setzen
+                // Rot
+                g2.setColor(new Color(220, 50, 50));
+                g2.fillOval(x + 6, y + 7, 4, 4);
+                // Gelb
+                g2.setColor(new Color(245, 190, 40));
+                g2.fillOval(x + 11, y + 6, 4, 4);
+                // Grün
+                g2.setColor(new Color(70, 170, 85));
+                g2.fillOval(x + 15, y + 9, 4, 4);
+                // Blau
+                g2.setColor(new Color(60, 120, 210));
+                g2.fillOval(x + 7, y + 13, 4, 4);
+                // Violett
+                g2.setColor(new Color(150, 80, 180));
+                g2.fillOval(x + 12, y + 13, 4, 4);
                 break;
 
             // Symbol für Beenden
