@@ -14,12 +14,15 @@ public class Rectangle implements Shape, Serializable {
     // Strichstärke der Linien des Rechtecks
     private final float strokeWidth;
 
+    // Standardwerte
+    private static final Color DEFAULT_COLOR = Color.BLACK;
+    private static final float DEFAULT_STROKE = 1.0f;
+
     // Alter Konstruktor
     // Wird weiterhin unterstützt, falls er an anderer Stelle verwendet wird.
     public Rectangle(Point start, Point end) {
-        this(start, end, Color.BLACK, 1.0f);
+        this(start, end, DEFAULT_COLOR, DEFAULT_STROKE);
     }
-
 
     // Neuer Konstruktor:
     // Startpunkt, Endpunkt, Farbe und Strichstärke
@@ -60,12 +63,16 @@ public class Rectangle implements Shape, Serializable {
         gRectangle.setColor(color);
         gRectangle.setStroke(new BasicStroke(strokeWidth));
 
+        // Koordinaten normalisieren
+        int minX = Math.min(start.x, end.x);
+        int minY = Math.min(start.y, end.y);
         // Breite berechnet aus Differenz der x-Koordinaten
-        int width = end.x - start.x;
+        int width = Math.abs(end.x - start.x);
         // Höhe berechnet aus Differenz der y-Koordinaten
-        int height = end.y - start.y;
+        int height = Math.abs(end.y - start.y);
+
         // Rechteck zeichnen
-        gRectangle.drawRect(start.x, start.y, width, height);
+        gRectangle.drawRect(minX, minY, width, height);
 
         // Einstellungen wiederherstellen
         gRectangle.setColor(oldColor);
