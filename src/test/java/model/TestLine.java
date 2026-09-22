@@ -44,17 +44,17 @@ public class TestLine {
                 // TL-KG01 prüft den alten Konstruktor mit den automatisch verwendeten Standardwerten.
                 Arguments.of(
                         "TL-KG01: start=(0,0), end=(10,10), color=null, strokeWidth=null",
-                        // startX
+                        // Startpunkt X
                         0,
-                        // startY
+                        // Startpunkt Y
                         0,
-                        // endX
+                        // Enpunkt X
                         10,
-                        // endY
+                        // Endpunkt Y
                         10,
-                        // inputColor
+                        // inputFarbe
                         null,
-                        // inputStrokeWidth
+                        // inputStrichstärke
                         null,
                         // erwartete Farbe
                         Color.BLACK,
@@ -65,38 +65,37 @@ public class TestLine {
                 // TL-KG02 prüft den neuen Konstruktor mit einer roten Linie und einer Strichstärke von 2.0f.
                 Arguments.of(
                         "TL-KG02: start=(0,0), end=(10,10), color=RED, strokeWidth=2.0f",
-                        // startX
+                        // Startpunkt X
                         0,
-                        // startY
+                        // Startpunkt Y
                         0,
-                        // endX
+                        // Enpunkt X
                         10,
-                        // endY
+                        // Endpunkt Y
                         10,
-                        // inputColor
+                        // inputFarbe
                         Color.RED,
-                        // inputStrokeWidth
-                        2.0f,
+                        // inputStrichstärke
+                        1.0f,
                         // erwartete Farbe
                         Color.RED,
                         // erwartete Strichstärke
-                        2.0f
+                        1.0f
                 ),
-
                 // TL-KG03 prüft den neuen Konstruktor mit einer schwarzen Linie und einer Strichstärke von 1.0f.
                 Arguments.of(
                         "TL-KG03: start=(0,0), end=(10,10), color=BLACK, strokeWidth=1.0f",
-                        // startX
+                        // Startpunkt X
                         0,
-                        // startY
+                        // Startpunkt Y
                         0,
-                        // endX
+                        // Enpunkt X
                         10,
-                        // endY
+                        // Endpunkt Y
                         10,
-                        // inputColor
+                        // inputFarbe
                         Color.BLACK,
-                        // inputStrokeWidth
+                        // inputStrichstärke
                         1.0f,
                         // erwartete Farbe
                         Color.BLACK,
@@ -255,38 +254,38 @@ public class TestLine {
                 // TL-P08: Der Punkt liegt auf der verlängerten Geraden vor dem Startpunkt.
                 Arguments.of(
                         "TL-P08: (0,0) -> (100,0), Punkt=(-10,0), strokeWidth=1.0, erwartet=false",
-                        0, 0,
-                        100, 0,
-                        -10, 0,
-                        1.0f,
-                        false
+                        0, 0, // Startpunkt
+                        100, 0, // Endpunkt
+                        -10, 0, // Punkt X, Punkt Y
+                        1.0f, // Strichbreite
+                        false // gültig = true | ungültig = false
                 ),
                 // TL-P09: Der Punkt liegt auf der verlängerten Geraden hinter dem Endpunkt.
                 Arguments.of(
                         "TL-P09: (0,0) -> (100,0), Punkt=(110,0), strokeWidth=1.0, erwartet=false",
-                        0, 0,
-                        100, 0,
-                        110, 0,
-                        1.0f,
-                        false
+                        0, 0, // Startpunkt
+                        100, 0, // Endpunkt
+                        110, 0, // Punkt X, Punkt Y
+                        1.0f, // Strichbreite
+                        false // gültig = true | ungültig = false
                 ),
                 // TL-P10: Bei einer größeren Strichstärke liegt der Punkt innerhalb der erweiterten Toleranz.
                 Arguments.of(
                         "TL-P10: (0,0) -> (100,0), Punkt=(50,7), strokeWidth=10.0, erwartet=true",
-                        0, 0,
-                        100, 0,
-                        50, 7,
-                        10.0f,
-                        true
+                        0, 0, // Startpunkt
+                        100, 0, // Endpunkt
+                        50, 7, // Punkt X, Punkt Y
+                        10.0f, // Strichbreite
+                        true // gültig = true | ungültig = false
                 ),
                 // TL-P11: Bei einer größeren Strichstärke liegt der Punkt außerhalb der erweiterten Toleranz.
                 Arguments.of(
                         "TL-P11: (0,0) -> (100,0), Punkt=(50,9), strokeWidth=10.0, erwartet=false",
-                        0, 0,
-                        100, 0,
-                        50, 9,
-                        10.0f,
-                        false
+                        0, 0, // Startpunkt
+                        100, 0, // Endpunkt
+                        50, 9, // Punkt X, Punkt Y
+                        10.0f, // Strichbreite
+                        false // gültig = true | ungültig = false
                 )
         );
     }
