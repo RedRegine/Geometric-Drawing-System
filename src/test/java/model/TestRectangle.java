@@ -31,7 +31,6 @@ public class TestRectangle {
     // Diese Methode wird nach jedem einzelnen Testfall ausgeführt.
     @AfterEach
     void after() {
-
         // Die Referenz wird nach dem Test wieder zurückgesetzt.
         myRectangle = null;
     }

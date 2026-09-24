@@ -1,6 +1,6 @@
 package model; // Modell-Paket: enthält konkrete Shape-Implementierungen
 import api.Shape; // Shape-Interface für gemeinsame Zeichenfunktion
-import java.awt.*; // AWT für Layouts (BorderLayout)
+import java.awt.*; // AWT-Klassen für Punkte, Farben und Zeichenoperationen
 import java.io.Serializable; // Serializable für Datei-Speicherung
 
 // Klasse für Ellipsenobjekte, implementiert Shape und Serializable
@@ -9,9 +9,9 @@ public class Ellipse implements Shape, Serializable {
     private final Point start;
     // Endpunkt (rechte untere Ecke des Begrenzungsrechtecks)
     private final Point end;
-    // Farbe des Rechtecks
+    // Farbe der Ellipse
     private final Color color;
-    // Strichstärke der Linien des Rechtecks
+    // Strichstärke der Linien der Ellipse
     private final float strokeWidth;
 
     // Alter Konstruktor
