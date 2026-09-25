@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach; // Importiert die JUnit-Annotation für
 import org.junit.jupiter.api.AfterEach; // Importiert die JUnit-Annotation für die Nachbereitung nach jedem Test.
 import org.junit.jupiter.params.ParameterizedTest; // Importiert den JUnit-Typ für parametrisierte Tests.
 import org.junit.jupiter.params.provider.MethodSource; // Importiert die MethodSource für die Bereitstellung von Testdaten.
-import java.awt.Point; // Importiert Point für die Start- und Endpunkte des Rechtecks.
+import java.awt.Point; // Importiert Point für die Start- und Endpunkte.
 import java.awt.Color; // Importiert Color für die Prüfung der Rechteckfarbe.
 import java.awt.BasicStroke; // Importiert BasicStroke für die Prüfung der Strichstärke.
 import java.awt.Stroke; // Importiert Stroke für die Prüfung des Graphics2D-Zustands.
@@ -35,10 +35,12 @@ public class TestRectangle {
         myRectangle = null;
     }
 
+
     // Liefert die Testdaten für die Prüfung der Konstruktoren und Getter.
     static Stream<Object[]> constructorAndGetterCases() {
         // Erstellt einen Stream mit allen Testfällen für Konstruktoren und Getter.
         return Stream.<Object[]>of(
+
                 // TR-KG01 prüft den alten Konstruktor mit den Standardwerten.
                 new Object[]{
                         "TR-KG01: start=(0,0), end=(10,10), Standardfarbe=BLACK, Standard strokeWidth=1.0f",
@@ -111,6 +113,7 @@ public class TestRectangle {
         assertEquals(expectedStrokeWidth, myRectangle.getStrokeWidth());
     }
 
+
     // Liefert die Testdaten für die Prüfung von containsPoint() bei normaler Koordinatenrichtung.
     static Stream<Object[]> containsPointCases() {
         // Erstellt einen Stream mit gültigen und ungültigen Punkten.
@@ -119,14 +122,10 @@ public class TestRectangle {
                 // TR-P01 prüft einen Punkt innerhalb des Rechtecks.
                 new Object[]{
                         "TR-P01: start=(0,0), end=(100,100), Punkt=(50,50), erwartet=true",
-                        // Startpunkt
-                        0, 0,
-                        // Endpunkt
-                        100, 100,
-                        // Punkt X, Punkt Y
-                        50, 50,
-                        // gültig = true | ungültig = false
-                        true
+                        0, 0, // Startpunkt
+                        100, 100, // Endpunkt
+                        50, 50, // Punkt X, Punkt Y
+                        true // gültig = true | ungültig = false
                 },
 
                 // TR-P02 prüft die obere linke Ecke des Rechtecks.
@@ -251,6 +250,7 @@ public class TestRectangle {
         }
     }
 
+
     // Liefert die Testdaten für Rechtecke mit umgekehrter Koordinatenrichtung.
     static Stream<Object[]> reversedContainsPointCases() {
         // Erstellt einen Stream mit Punkten für die Prüfung der Koordinatennormalisierung.
@@ -264,6 +264,7 @@ public class TestRectangle {
                         50, 50, // Punkt X, Punkt Y
                         true // gültig = true | ungültig = false
                 },
+
                 // TR-P13 prüft die Ecke (0,0) bei umgekehrter Koordinatenrichtung.
                 new Object[]{
                         "TR-P13: start=(100,100), end=(0,0), Punkt=(0,0), erwartet=true",
@@ -332,6 +333,7 @@ public class TestRectangle {
     static Stream<Object[]> drawCases() {
         // Erstellt einen Stream mit verschiedenen Farben und Strichstärken.
         return Stream.<Object[]>of(
+
                 // TR-D01 prüft das Zeichnen mit den Standardwerten.
                 new Object[]{
                         "TR-D01: start=(5,5), end=(20,20), color=BLACK, strokeWidth=1.0f",
@@ -344,9 +346,9 @@ public class TestRectangle {
                 // TR-D02 prüft das Zeichnen mit roter Farbe und stärkerem Strich.
                 new Object[]{
                         "TR-D02: start=(5,5), end=(20,20), color=RED, strokeWidth=3.0f",
-                        5, 5,
-                        20, 20,
-                        Color.RED,
+                        5, 5, // Startpunkt
+                        20, 20, // Endpunkt
+                        Color.RED, // Farbe
                         3.0f // Linienstärke
                 },
 
@@ -407,18 +409,14 @@ public class TestRectangle {
     static Stream<Object[]> graphicsStateCases() {
         // Gibt den definierten Testfall zurück.
         return Stream.<Object[]>of(
+
                 // TR-D04 prüft, ob Farbe und Stroke nach dem Zeichnen wiederhergestellt werden.
                 new Object[]{
-                        // Name des Testfalls.
                         "TR-D04: Rectangle color=BLUE, strokeWidth=2.0f, vorherige Farbe=GREEN, vorheriger Stroke=5.0f",
-                        // Farbe des Rechtecks.
-                        Color.BLUE,
-                        // Strichstärke des Rechtecks.
-                        2.0f,
-                        // Farbe, die vor dem Zeichnen im Graphics2D-Objekt vorhanden ist.
-                        Color.GREEN,
-                        // Strichstärke, die vor dem Zeichnen im Graphics2D-Objekt vorhanden ist.
-                        5.0f
+                        Color.BLUE, // Farbe des Rechtecks.
+                        2.0f, // Strichstärke des Rechtecks.
+                        Color.GREEN, // Farbe, die vor dem Zeichnen im Graphics2D-Objekt vorhanden ist.
+                        5.0f // Strichstärke, die vor dem Zeichnen im Graphics2D-Objekt vorhanden ist.
                 }
         );
     }
