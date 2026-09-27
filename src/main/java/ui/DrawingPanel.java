@@ -109,7 +109,6 @@ public class DrawingPanel extends JPanel {
                         g2.dispose();
                     }
                 }
-
                 // Vorschau zurücksetzen
                 startPoint = null;
                 currentPoint = null;

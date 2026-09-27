@@ -11,7 +11,6 @@ import java.awt.Graphics2D; // Importiert Graphics2D für die draw()-Tests.
 import java.awt.Point; // Importiert Point für Start- und Endpunkte.
 import java.awt.Stroke; // Importiert Stroke für die Prüfung des Graphics-Zustands.
 import java.awt.image.BufferedImage; // Importiert BufferedImage als Zeichenfläche.
-
 import java.util.stream.Stream; // Importiert Stream für die Bereitstellung der Testdaten.
 
 // Testklasse für die Klasse Ellipse.
@@ -310,10 +309,8 @@ public class TestEllipse {
             int x,
             int y,
             boolean expected) {
-
         // Erstellt die Ellipse mit umgekehrten Koordinaten.
         ellipse = new Ellipse(start, end);
-
         // Prüft, ob reverseContainsPoint() das erwartete Ergebnis liefert.
         Assertions.assertEquals(
                 expected,
