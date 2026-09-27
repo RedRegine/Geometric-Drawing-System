@@ -295,4 +295,26 @@ public class DrawingPanel extends JPanel {
     protected void showInfoMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    // Folgende Methoden werden für die Integrationstests benötigt:
+    // Gibt den Startpunkt zurück
+    protected Point getStartPoint() {
+        return startPoint;
+    }
+    // Setzt den Startpunkt
+    protected void setStartPoint(Point p) {
+        this.startPoint = p;
+    }
+    // Gibt den aktuellen Punkt zurück
+    protected Point getCurrentPoint() {
+        return currentPoint;
+    }
+    // Setzt den aktuellen Punkt
+    protected void setCurrentPoint(Point p) {
+        this.currentPoint = p;
+    }
+    // Gibt die Shape-Liste zurück
+    protected List<Shape> getShapes() {
+        return shapes;
+    }
 }
