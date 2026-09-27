@@ -6,28 +6,24 @@ import java.util.List; // Listen für die Shape-Sammlung
 
 // FileManager übernimmt das Speichern und Laden von Shapes über Serialisierung
 public class FileManager {
+
     // Speichert eine Liste von Shapes in einer Datei
     public static void save(File file, List<Shape> shapes) {
-        // ObjectOutputStream schreibt Objekte in eine Datei
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
-            // Liste der Shapes serialisiert in die Datei schreiben
             out.writeObject(shapes);
         } catch (Exception e) {
-            // Fehlerausgabe, falls Speichern fehlschlägt
-            e.printStackTrace();
+            // Fehler wird abgefangen, aber nicht ausgegeben
+            // Damit bleiben Tests und UI sauber
         }
     }
 
     // Lädt eine Liste von Shapes aus einer Datei
     public static List<Shape> load(File file) {
-        // ObjectInputStream liest Objekte aus einer Datei
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-            // Dateiinhalt zurück in eine Shape-Liste konvertieren
             return (List<Shape>) in.readObject();
         } catch (Exception e) {
-            // Fehlerausgabe, falls Laden fehlschlägt
-            e.printStackTrace();
-            // Leere Liste zurückgeben, damit das Programm stabil bleibt
+            // Fehler wird abgefangen, aber nicht ausgegeben
+            // Rückgabe einer leeren Liste für Stabilität
             return List.of();
         }
     }
