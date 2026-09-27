@@ -9,8 +9,12 @@ import org.junit.jupiter.api.BeforeEach; // Vorbereitung vor jedem Test
 import org.junit.jupiter.api.AfterEach; // Nachbereitung nach jedem Test
 import org.junit.jupiter.params.ParameterizedTest; // Markiert parametrisierte Tests
 import org.junit.jupiter.params.provider.MethodSource; // Bindet Streams als Testdatenquelle
-import java.util.stream.Stream; // Importiert Stream für Testfallgruppen
-import static org.junit.jupiter.api.Assertions.*; // Importiert Assertions
+import static org.junit.jupiter.api.Assertions.assertEquals; // Importiert Assertions zum Vergleichen von erwarteten und tatsächlichen Ergebnissen.
+import static org.junit.jupiter.api.Assertions.assertNotEquals; // Importiert Assertions zum Vergleichen von ungleichen Ergebnissen.
+import static org.junit.jupiter.api.Assertions.assertNotNull; // Importiert die Assertion zum Prüfen auf einen nicht leeren beziehungsweise nicht null-Wert.
+import static org.junit.jupiter.api.Assertions.assertNull; // Importiert die Assertion zum Prüfen auf einen leeren beziehungsweise null-Wert.
+import static org.junit.jupiter.api.Assertions.assertTrue; // Importiert die Assertion zum Prüfen auf true-Werte.
+import java.util.stream.Stream; // Importiert Stream, um die Testdaten für die parametrisierten Tests bereitzustellen.
 
 // Testklasse für die Klasse DrawingPanel
 public class TestDrawingPanel {
