@@ -191,7 +191,7 @@ public class DrawingPanel extends JPanel {
     }
 
     // Zeichnet alle vorhandenen Shapes neu auf das Bild
-    private void redrawImage() {
+    protected void redrawImage() {
         // Graphics2D vom Bild holen
         Graphics2D g2 = image.createGraphics();
         // Bild komplett weiß machen
