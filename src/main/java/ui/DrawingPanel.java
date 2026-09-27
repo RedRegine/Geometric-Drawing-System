@@ -126,7 +126,10 @@ public class DrawingPanel extends JPanel {
 
     // Erzeugt ein Shape basierend auf dem aktuellen Typ und den Punkten mit gültigen Werten
     protected Shape createShape(Point start, Point end) {
-
+        // Wenn kein Startpunkt existiert, darf auch kein Shape erzeugt werden
+        if (start == null || end == null) {
+            return null;
+        }
         switch (currentType) {
 
             case LINE:
