@@ -130,7 +130,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         50, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P02 prüft Punkt innerhalb der Ellipse.
@@ -139,7 +139,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         50, 15, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P03 prüft Punkt innerhalb der Ellipse.
@@ -148,7 +148,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         25, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P04 prüft Punkt innerhalb der Ellipse.
@@ -157,7 +157,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         75, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P05 prüft Linker Randpunkt der Ellipse.
@@ -166,7 +166,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         0, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P06 prüft Rechter Randpunkt der Ellipse.
@@ -175,7 +175,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         100, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P07 prüft Oberer Randpunkt der Ellipse.
@@ -184,7 +184,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         50, 0, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P08 prüft Unterer Randpunkt der Ellipse.
@@ -193,7 +193,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         50, 60, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P09 prüft Obere linke Ecke des Begrenzungsrechtecks.
@@ -202,7 +202,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         0, 0, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TE-P10 prüft Untere rechte Ecke des Begrenzungsrechtecks.
@@ -211,7 +211,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         100, 60, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TE-P11 prüft Punkt außerhalb der Ellipse.
@@ -220,7 +220,7 @@ public class TestEllipse {
                         new Point(0, 0), // Startpunkt
                         new Point(100, 60), // Endpunkt
                         -1, 30, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 }
         );
     }
@@ -257,7 +257,7 @@ public class TestEllipse {
                         new Point(100, 60), // Startpunkt
                         new Point(0, 0), // Endpunkt
                         50, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P13: Punkt innerhalb der Ellipse.
@@ -266,7 +266,7 @@ public class TestEllipse {
                         new Point(100, 60), // Startpunkt
                         new Point(0, 0), // Endpunkt
                         50, 15, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P14: Linker Randpunkt der Ellipse.
@@ -275,7 +275,7 @@ public class TestEllipse {
                         new Point(100, 60), // Startpunkt
                         new Point(0, 0), // Endpunkt
                         0, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P15: Rechter Randpunkt der Ellipse.
@@ -284,7 +284,7 @@ public class TestEllipse {
                         new Point(100, 60), // Startpunkt
                         new Point(0, 0), // Endpunkt
                         100, 30, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TE-P16: Punkt außerhalb der Ellipse.
@@ -293,7 +293,7 @@ public class TestEllipse {
                         new Point(100, 60), // Startpunkt
                         new Point(0, 0), // Endpunkt
                         101, 30, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 }
         );
     }
@@ -434,7 +434,7 @@ public class TestEllipse {
 
                 // TE-D04: Die Ellipse verwendet Blau und 2.0f, der vorherige Graphics2D-Zustand ist Grün und 5.0f.
                 new Object[]{
-                        "TE-D04 (BLUE,2.0f,GREEN,5.0f)",
+                        "TE-D04: used(color=BLUE, strokeWidth=2.0f), previous(color=GREEN, strokeWidth=5.0f)",
                         Color.BLUE, // verwendete Farbe
                         2.0f, // verwendete Linienstärke
                         Color.GREEN, // vorherige Farbe

@@ -125,7 +125,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         50, 50, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P02 prüft die obere linke Ecke des Rechtecks.
@@ -134,7 +134,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         0, 0, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P03 prüft die untere rechte Ecke des Rechtecks.
@@ -143,7 +143,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         100, 100, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P04 prüft einen Punkt auf der linken Begrenzung.
@@ -152,7 +152,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         0, 50, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P05 prüft einen Punkt auf der rechten Begrenzung.
@@ -161,7 +161,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         100, 50, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P06 prüft einen Punkt auf der oberen Begrenzung.
@@ -170,7 +170,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         50, 0, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P07 prüft einen Punkt auf der unteren Begrenzung.
@@ -179,7 +179,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         50, 100, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P08 prüft einen Punkt knapp außerhalb der linken Begrenzung.
@@ -188,7 +188,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         -1, 50, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TR-P09 prüft einen Punkt knapp außerhalb der rechten Begrenzung.
@@ -197,7 +197,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         101, 50, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TR-P10 prüft einen Punkt knapp oberhalb des Rechtecks.
@@ -206,7 +206,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         50, -1, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TR-P11 prüft einen Punkt knapp unterhalb des Rechtecks.
@@ -215,7 +215,7 @@ public class TestRectangle {
                         0, 0, // Startpunkt
                         100, 100, // Endpunkt
                         50, 101, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 }
         );
     }
@@ -262,7 +262,7 @@ public class TestRectangle {
                         100, 100, // Startpunkt
                         0, 0, // Endpunkt
                         50, 50, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P13 prüft die Ecke (0,0) bei umgekehrter Koordinatenrichtung.
@@ -271,7 +271,7 @@ public class TestRectangle {
                         100, 100, // Startpunkt
                         0, 0, // Endpunkt
                         0, 0, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P14 prüft die Ecke (100,100) bei umgekehrter Koordinatenrichtung.
@@ -280,7 +280,7 @@ public class TestRectangle {
                         100, 100, // Startpunkt
                         0, 0, // Endpunkt
                         100, 100, // Punkt X, Punkt Y
-                        true // gültig = true | ungültig = false
+                        true // Erwartungswert
                 },
 
                 // TR-P15 prüft einen Punkt außerhalb der linken Begrenzung.
@@ -289,7 +289,7 @@ public class TestRectangle {
                         100, 100, // Startpunkt
                         0, 0, // Endpunkt
                         -1, 50, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 },
 
                 // TR-P16 prüft einen Punkt außerhalb der rechten Begrenzung.
@@ -298,7 +298,7 @@ public class TestRectangle {
                         100, 100, // Startpunkt
                         0, 0, // Endpunkt
                         101, 50, // Punkt X, Punkt Y
-                        false // gültig = true | ungültig = false
+                        false // Erwartungswert
                 }
         );
     }
@@ -405,6 +405,8 @@ public class TestRectangle {
             graphics.dispose();
         }
     }
+
+
     // Liefert die Testdaten für die Prüfung der Wiederherstellung des Graphics2D-Zustands.
     static Stream<Object[]> graphicsStateCases() {
         // Gibt den definierten Testfall zurück.
