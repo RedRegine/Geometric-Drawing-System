@@ -125,7 +125,7 @@ public class DrawingPanel extends JPanel {
 
 
     // Erzeugt ein Shape basierend auf dem aktuellen Typ und den Punkten mit gültigen Werten
-    private Shape createShape(Point start, Point end) {
+    protected Shape createShape(Point start, Point end) {
 
         switch (currentType) {
 
